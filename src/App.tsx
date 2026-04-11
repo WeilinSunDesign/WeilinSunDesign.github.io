@@ -62,12 +62,12 @@ const navSections = [
 ];
 
 const images = [
-  { img: "/weilinportfolio.github.io/swiftfood.png",     title: "Swift Food App",     slug: "swiftfood"     },
-  { img: "/weilinportfolio.github.io/healthtech.png",    title: "Health Tech Design", slug: "healthtech"    },
-  { img: "/weilinportfolio.github.io/volunteer.png",     title: "Volunteer Platform", slug: "volunteer"     },
-  { img: "/weilinportfolio.github.io/vrlibrary.png",     title: "VR Library",         slug: "vrlibrary"     },
-  { img: "/weilinportfolio.github.io/cardgame.png",      title: "Card Game",          slug: "cardgame"      },
-  { img: "/weilinportfolio.github.io/foldablerobot.png", title: "Foldable Robot",     slug: "foldablerobot" },
+  { img: "./swiftfood.png",     title: "Multi-Sided B2B2C Catering Platform",     slug: "swiftfood"     },
+  { img: "./healthtech.png",    title: "AI-powered Health Tech App", slug: "healthtech"    },
+  { img: "./volunteer.png",     title: "AR Future Volunteer System", slug: "volunteer"     },
+  { img: "./vrlibrary.png",     title: "VR Library of Language Preservation",         slug: "vrlibrary"     },
+  { img: "./cardgame.png",      title: "Gamified System for Cross-Cultural Communication",          slug: "cardgame"      },
+  { img: "./foldablerobot.png", title: "Foldable Robot",     slug: "foldablerobot" },
 ];
 
 const AUTO_DELAY         = 5000;
@@ -271,7 +271,7 @@ export default function App() {
           </div>
 
           {/* 大标题 */}
-          <h1 className="font-futura-bold text-[clamp(3rem,6vw,7rem)] tracking-tighter leading-[0.88] mb-[18px] max-md:mb-[3vw] max-md:fixed max-md:top-[14%]">
+          <h1 className="font-futura-heavy text-[clamp(3rem,6vw,7rem)] tracking-tighter leading-[0.88] mb-[18px] max-md:mb-[3vw] max-md:fixed max-md:top-[14%]">
             Weilin Sun
           </h1>
 
@@ -305,15 +305,10 @@ export default function App() {
 
           {/* 简介文字 */}
           <div className="font-futura-light text-[clamp(12px,1.1vw,15px)] leading-[1.55] w-full opacity-80 mb-[56px] max-md:mb-[30vw] max-md:fixed max-md:top-[30%]">
-            <p className="mb-0">I design futures that are grounded in reality.</p>
+            <p className="mb-0">A product designer with a background in Material Science and Engneering. Specialised in bridging the gap between emerging tech and human-centric experiences. </p>
             <p className="mb-0">
-              I have a background in Material Science and Engineering, I approach design through both
-              speculative thinking and real-world constraints.
-            </p>
-            <p className="mb-0">
-              My work moves between speculative prototypes and real-world products—from exploring
-              possible futures to building platforms used by thousands of users.
-            </p>
+              Experienced in AI-assisted product design workflows, with a proven track record of translating speculative research into tangible prototypes and products.
+            </p>            
           </div>
 
           {/* 导航菜单（桌面） */}

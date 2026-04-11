@@ -30,7 +30,7 @@ const css = `
     justify-content: flex-end;
     position: relative;
     overflow: hidden;
-    background: #1A1A1A;
+    background: black;
   }
   .oceanus-hero-img {
     position: absolute;
@@ -109,7 +109,7 @@ const css = `
     font-size: 10px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(26,26,26,0.55);
+    color: black;
     margin-bottom: 48px;
     display: flex;
     align-items: center;
@@ -357,7 +357,7 @@ const css = `
   }
 `;
 
-const img = (name: string) => `/weilinportfolio.github.io/${name}`;
+const img = (name: string) => `./${name}`;
 
 export default function VrVolunteerSystem() {
   useEffect(() => {
@@ -397,13 +397,12 @@ export default function VrVolunteerSystem() {
           <div className="oceanus-hero-content">
             <h1 className="oceanus-hero-title">OCEANUS</h1>
             <div className="oceanus-hero-meta">
-              <span className="oceanus-hero-tagline">AR System for Future Volunteers</span>
               <p className="oceanus-hero-desc">
                 A speculative design project imagining how AR glasses could coordinate volunteer response during catastrophic London Thames flooding in 2070.
               </p>
-              <div className="oceanus-hero-tags">
-                <span className="oceanus-tag">Speculative Design</span>
-                <span className="oceanus-tag">AR / UX</span>
+              <div className="oceanus-hero-tags" >
+                <span className="oceanus-tag">AR</span>
+                <span className="oceanus-tag">UX</span>
                 <span className="oceanus-tag">Futures Research</span>
               </div>
             </div>
@@ -724,28 +723,12 @@ export default function VrVolunteerSystem() {
                 <p style={{ fontSize: 14 }}>
                   If repeated, we would conduct primary research with actual British Red Cross volunteers to pressure-test the system against real operational constraints, and run usability studies with the AR prototype to validate the cognitive load assumptions baked into the interface design.
                 </p>
-                <div className="oceanus-credits">
-                  <div className="oceanus-credit-group">
-                    <span className="oceanus-credit-role">Team</span>
-                    {["Tongyu Du", "Weilin Sun", "Siyuan Liu", "Zhihao Wang"].map((n) => (
-                      <span className="oceanus-credit-name" key={n}>{n}</span>
-                    ))}
-                  </div>
-                  <div className="oceanus-credit-group">
-                    <span className="oceanus-credit-role">Context</span>
-                    <span className="oceanus-credit-name">Speculative Design Studio</span>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ── Footer ── */}
-        <footer className="oceanus-footer">
-          <span>Weilin Sun — Portfolio</span>
-          <span>OCEANUS — AR System for Future Volunteers</span>
-        </footer>
+       
       </div>
     </>
   );

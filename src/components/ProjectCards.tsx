@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function ProjectCard({ project }) {
   return (
     <Link
-      to={`/project/${project.slug}`}
+      to={`/projects/${project.slug}`}
       className="block border-r border-b border-black first:border-l"
       aria-label={project.title}
     >
@@ -22,12 +22,12 @@ export default function ProjectCard({ project }) {
           )}
         </div>
 
-        <div className="flex flex-1 items-center justify-center px-5 py-8 md:px-8 md:py-10">
-          <img
-            src={project.image}
-            alt={project.title}
-            className="max-h-[260px] w-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
-          />
+        <div className="w-full aspect-[4/3] overflow-hidden px-5 py-4 md:px-8 md:py-6">
+        <img
+           src={project.image}
+           alt={project.title}
+          className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+         />
         </div>
 
         <div className="mt-auto flex items-end justify-between gap-4 px-5 pb-5 pt-2 md:px-6 md:pb-6">

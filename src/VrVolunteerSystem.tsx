@@ -53,16 +53,16 @@ const designPoints = [
 ];
 
 const arFlowRow1 = [
-  { src: "oceanus-arflow-setup.png",      caption: "01 — Scanning & Setup" },
-  { src: "oceanus-arflow-dispatch.png",   caption: "02 — Mission Dispatched" },
-  { src: "oceanus-arflow-navigation.png", caption: "03 — AR Navigation" },
-  { src: "oceanus-arflow-arrive.png",     caption: "04 — Arrive at Scene" },
+  { src: "oceanus-arflow-setup.webp",      caption: "01 — Scanning & Setup" },
+  { src: "oceanus-arflow-dispatch.webp",   caption: "02 — Mission Dispatched" },
+  { src: "oceanus-arflow-navigation.webp", caption: "03 — AR Navigation" },
+  { src: "oceanus-arflow-arrive.webp",     caption: "04 — Arrive at Scene" },
 ];
 
 const arFlowRow2 = [
-  { src: "oceanus-arflow-guidance.png",    caption: "05 — Guidance Overlay" },
-  { src: "oceanus-arflow-immobilize.png",  caption: "06 — Immobilize Instruction" },
-  { src: "oceanus-arflow-complete.png",    caption: "07 — Mission Complete" },
+  { src: "oceanus-arflow-guidance.webp",    caption: "05 — Guidance Overlay" },
+  { src: "oceanus-arflow-immobilize.webp",  caption: "06 — Immobilize Instruction" },
+  { src: "oceanus-arflow-complete.webp",    caption: "07 — Mission Complete" },
 ];
 
 // ── Sub-components ─────────────────────────────────────────────────────────────
@@ -88,19 +88,6 @@ function SubDivider() {
   return <div className="border-t border-black/[0.07] mt-[40px] mb-[8px]" />;
 }
 
-function ImageBlock({ src, alt, caption, ratio = "16/9" }: { src: string; alt: string; caption?: string; ratio?: string }) {
-  return (
-    <div className="flex flex-col gap-[6px]">
-      <img
-        src={src}
-        alt={alt}
-        className="w-full block"
-        style={{ aspectRatio: ratio, objectFit: "cover" }}
-      />
-      {caption && <p className="font-futura-heavy text-[11px] opacity-30 text-black">{caption}</p>}
-    </div>
-  );
-}
 
 function InsightBlock({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -273,7 +260,7 @@ export default function VrVolunteerSystem() {
         style={{
           position:           "relative",
           height:             "100svh",
-          backgroundImage:    "url(/volunteerhero.png)",
+          backgroundImage:    "url(/volunteerhero.webp)",
           backgroundSize:     "cover",
           backgroundPosition: typeof window !== "undefined" && window.innerWidth < 768
             ? `center ${scrollY * 0.1}px`
@@ -351,7 +338,7 @@ export default function VrVolunteerSystem() {
           {/* Left — image */}
           <div className="flex flex-col justify-center self-stretch">
             <img
-              src="/oceanus-glasses-render-2.png"
+              src="/oceanus-intro.webp"
               alt="OCEANUS AR glasses render"
               className="w-full"
               style={{ display: "block" }}
@@ -443,13 +430,12 @@ export default function VrVolunteerSystem() {
                   streamlined AR-enabled flow.
                 </p>
               </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2 flex flex-col gap-[16px]">
-                <img src="/oceanus-system-comparison.png" alt="Current vs future volunteer system" className="w-full block" />
-                <p className="font-futura-heavy text-[11px] opacity-30 text-black">
-                  Current six-step pipeline vs. OCEANUS three-step AR-enabled flow
-                </p>
-              </div>
+            </div>
+            <div className="mt-[24px] flex flex-col gap-[8px]">
+              <img src="/oceanus-system-comparison.webp" alt="Current vs future volunteer system" className="w-full block" />
+              <p className="font-futura-heavy text-[11px] opacity-30 text-black">
+                Current six-step pipeline vs. OCEANUS three-step AR-enabled flow
+              </p>
             </div>
           </section>
 
@@ -509,13 +495,14 @@ export default function VrVolunteerSystem() {
               <div>
                 <p className="type-eyebrow mb-[16px]">Analysis materials</p>
               </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2 flex flex-col gap-[16px]">
-                <img src="/oceanus-research-analysis-1.png" alt="Sea level rising analysis" className="w-full block" />
-                <img src="/oceanus-research-analysis-2.png" alt="Sea level rising analysis" className="w-full block" />
-                <img src="/oceanus-research-thames.png" alt="London Thames flood history and data" className="w-full block" />
-                <p className="font-futura-heavy text-[11px] opacity-30 text-black">London Thames flood history and data visualisation</p>
+            </div>
+            <div className="mt-[24px] flex flex-col gap-[16px]">
+              <div>
+                <img src="/oceanus-research-analysis-1.webp" alt="Sea level rising analysis" className="w-full block" />
+                <img src="/oceanus-research-analysis-2.webp" alt="Sea level rising analysis" className="w-full block" />
               </div>
+              <img src="/oceanus-research-thames.webp" alt="London Thames flood history and data" className="w-full block" />
+              <p className="font-futura-heavy text-[11px] opacity-30 text-black">London Thames flood history and data visualisation</p>
             </div>
           </section>
 
@@ -576,11 +563,10 @@ export default function VrVolunteerSystem() {
               <div>
                 <p className="type-eyebrow mb-[16px]">Futures cone matrix</p>
               </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2">
-                <img src="/oceanus-scenario-matrix.png" alt="Futures cone scenario matrix" className="w-full block" />
-                <p className="font-futura-heavy text-[11px] opacity-30 text-black mt-[6px]">Futures cone scenario matrix — London 2070–2080</p>
-              </div>
+            </div>
+            <div className="mt-[24px] flex flex-col gap-[8px]">
+              <img src="/oceanus-scenario-matrix.webp" alt="Futures cone scenario matrix" className="w-full block" />
+              <p className="font-futura-heavy text-[11px] opacity-30 text-black">Futures cone scenario matrix — London 2070–2080</p>
             </div>
           </section>
 
@@ -633,11 +619,10 @@ export default function VrVolunteerSystem() {
               <div>
                 <p className="type-eyebrow mb-[16px]">Stakeholder analysis</p>
               </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2">
-                <img src="/oceanus-issue-stakeholders.png" alt="Stakeholder analysis diagram" className="w-full block" />
-                <p className="font-futura-heavy text-[11px] opacity-30 text-black mt-[6px]">Stakeholder relationship map — 2021 flood incident</p>
-              </div>
+            </div>
+            <div className="mt-[24px] flex flex-col gap-[8px]">
+              <img src="/oceanus-issue-stakeholders.webp" alt="Stakeholder analysis diagram" className="w-full block" />
+              <p className="font-futura-heavy text-[11px] opacity-30 text-black">Stakeholder relationship map — 2021 flood incident</p>
             </div>
           </section>
 
@@ -747,12 +732,11 @@ export default function VrVolunteerSystem() {
               <div>
                 <p className="type-eyebrow mb-[16px]">Hardware renders</p>
               </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2 flex flex-col gap-[16px]">
-                <img src="/oceanus-glasses-render-2.png" alt="AR glasses hardware render" className="w-full block" />
-                <img src="/oceanus-glasses-diagram.png" alt="AR glasses internal and external display system" className="w-full block" />
-                <p className="font-futura-heavy text-[11px] opacity-30 text-black">OCEANUS AR glasses — internal and external display system diagram</p>
-              </div>
+            </div>
+            <div className="mt-[24px] flex flex-col gap-[16px]">
+              <img src="/oceanus-glasses-render-2.webp" alt="AR glasses hardware render" className="w-full block" />
+              <img src="/oceanus-glasses-diagram.webp" alt="AR glasses internal and external display system" className="w-full block" />
+              <p className="font-futura-heavy text-[11px] opacity-30 text-black">OCEANUS AR glasses — internal and external display system diagram</p>
             </div>
           </section>
 
@@ -785,11 +769,10 @@ export default function VrVolunteerSystem() {
               <div>
                 <p className="type-eyebrow mb-[16px]">Full flow overview</p>
               </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2">
-                <img src="/oceanus-arflow-overview.png" alt="AR user flow overview" className="w-full block" />
-                <p className="font-futura-heavy text-[11px] opacity-30 text-black mt-[6px]">Complete AR user flow — Medical Treatment mission</p>
-              </div>
+            </div>
+            <div className="mt-[24px] flex flex-col gap-[8px]">
+              <img src="/oceanus-arflow-overview.webp" alt="AR user flow overview" className="w-full block" />
+              <p className="font-futura-heavy text-[11px] opacity-30 text-black">Complete AR user flow — Medical Treatment mission</p>
             </div>
 
             <SubDivider />
@@ -799,19 +782,16 @@ export default function VrVolunteerSystem() {
               <div>
                 <p className="type-eyebrow mb-[16px]">Mission steps 01–04</p>
               </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2">
-                <div className="grid grid-cols-2 gap-[8px]">
-                  {arFlowRow1.map(({ src, caption }) => (
-                    <div key={src} className="relative overflow-hidden">
-                      <img src={`/${src}`} alt={caption} className="w-full block" />
-                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-[10px] pb-[8px] pt-[20px]">
-                        <p className="font-futura-medium text-[9px] tracking-[0.1em] uppercase text-white/80">{caption}</p>
-                      </div>
-                    </div>
-                  ))}
+            </div>
+            <div className="mt-[24px] flex flex-col gap-[8px]">
+              {arFlowRow1.map(({ src, caption }) => (
+                <div key={src} className="relative overflow-hidden">
+                  <img src={`/${src}`} alt={caption} className="w-full block" />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-[10px] pb-[8px] pt-[20px]">
+                    <p className="font-futura-medium text-[9px] tracking-[0.1em] uppercase text-white/80">{caption}</p>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
 
             <SubDivider />
@@ -820,24 +800,16 @@ export default function VrVolunteerSystem() {
               <div>
                 <p className="type-eyebrow mb-[16px]">Mission steps 05–07</p>
               </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2">
-                <div className="grid grid-cols-2 gap-[8px]">
-                  {arFlowRow2.map(({ src, caption }) => (
-                    <div key={src} className="relative overflow-hidden">
-                      <img src={`/${src}`} alt={caption} className="w-full block" />
-                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-[10px] pb-[8px] pt-[20px]">
-                        <p className="font-futura-medium text-[9px] tracking-[0.1em] uppercase text-white/80">{caption}</p>
-                      </div>
-                    </div>
-                  ))}
-                  <div className="flex items-center justify-center bg-brand/10 p-[24px]">
-                    <p className="font-futura-medium text-[10px] tracking-[0.12em] uppercase text-black/50 text-center">
-                      Well done!<br />Continue mission?
-                    </p>
+            </div>
+            <div className="mt-[24px] flex flex-col gap-[8px]">
+              {arFlowRow2.map(({ src, caption }) => (
+                <div key={src} className="relative overflow-hidden">
+                  <img src={`/${src}`} alt={caption} className="w-full block" />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-[10px] pb-[8px] pt-[20px]">
+                    <p className="font-futura-medium text-[9px] tracking-[0.1em] uppercase text-white/80">{caption}</p>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
           </section>
 

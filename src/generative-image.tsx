@@ -24,27 +24,27 @@ const introDetails: { label: string; value: string | React.ReactNode }[] = [
 // Six square images — replace paths with your own files
 const images = [
   {
-    filename: "gis-01.png",
+    filename: "gis-01.webp",
     caption: "Seed Form — the generative origin, iteration 01",
   },
   {
-    filename: "gis-02.png",
+    filename: "gis-02.webp",
     caption: "Noise Field — organic patterning across a 512 × 512 grid",
   },
   {
-    filename: "gis-03.png",
+    filename: "gis-03.webp",
     caption: "Growth Pattern — branching structure, iteration 12",
   },
   {
-    filename: "gis-04.png",
+    filename: "gis-04.webp",
     caption: "Fragment Study — decomposition and scatter",
   },
   {
-    filename: "gis-05.png",
+    filename: "gis-05.webp",
     caption: "System Output — final compositional render",
   },
   {
-    filename: "gis-06.png",
+    filename: "gis-06.webp",
     caption: "Residue — what the system leaves behind",
   },
 ];
@@ -121,7 +121,7 @@ export default function GenerativeImageStudy() {
         style={{
           position:           "relative",
           height:             "100svh",
-          backgroundImage:    "url(/gis-bg.png)",
+          backgroundImage:    "url(/gis-bg.webp)",
           backgroundSize:     "cover",
           backgroundPosition: typeof window !== "undefined" && window.innerWidth < 768
             ? `center ${scrollY * 0.1}px`

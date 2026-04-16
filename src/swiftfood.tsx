@@ -103,30 +103,6 @@ const roles = [
   },
 ];
 
-const decisions = [
-  {
-    number: "01",
-    title: "Soft control instead of rigid enforcement",
-    tension: "Employees want freedom. Managers need control.",
-    explored: ["Hard limits", "Approval flows", "Soft constraints (final decision)"],
-    body: "Hard limits blocked checkout. Approval flows required manager sign-off. Both interrupted the employee at the wrong moment.",
-    decision: "Budget is visible throughout the flow and highlighted near the limit — but never blocks checkout. This balanced autonomy and control without placing cognitive burden on either role.",
-  },
-  {
-    number: "02",
-    title: "One system, multiple views",
-    tension: "The same order means something different to everyone.",
-    body: "The mixed-basket model creates three simultaneous challenges: the employee sees a meal, the merchant sees a production ticket, the rider sees a pickup sequence.",
-    decision: "I designed a shared data model with role-specific representations. Each role sees only what matters to them. The data is shared; the view is not.",
-  },
-  {
-    number: "03",
-    title: "Removing a product that shouldn't exist",
-    tension: "Complexity from building rather than not building.",
-    body: "A dedicated company admin portal was considered. Mapping tasks against the manager's workflow revealed near-total overlap in functionality.",
-    decision: "Company functions were integrated into the manager role with elevated permission flags. The most impactful decision was choosing not to build — reducing complexity and improving onboarding.",
-  },
-];
 
 const merchantPrinciples = [
   { title: "One screen, one task",         body: "Merchants see only current orders for their stall, displayed as large ticket cards. No navigation — just what needs to be cooked now." },
@@ -175,6 +151,7 @@ function TreePipe() {
   return <div className="w-px h-[16px] bg-black/20 mx-auto" />;
 }
 
+
 function TreeConnector({ count }: { count: number }) {
   const centers = Array.from({ length: count }, (_, i) =>
     ((2 * i + 1) / (2 * count)) * 100
@@ -197,15 +174,28 @@ function SubDivider() {
   return <div className="border-t border-black/[0.07] mt-[40px] mb-[8px]" />;
 }
 
-function ImagePlaceholder({ filename, caption, ratio = "16/9" }: { filename: string; caption?: string; ratio?: string }) {
+function ImagePlaceholder({ filename, caption, ratio = "auto" }: { filename: string; caption?: string; ratio?: string }) {
+  const [error, setError] = useState(false);
   return (
     <div className="flex flex-col gap-[6px]">
-      <div
-        className="w-full bg-black/[0.03] border border-dashed border-black/12 flex items-center justify-center"
-        style={{ aspectRatio: ratio }}
-      >
-        <p className="type-eyebrow text-black/25">{filename}</p>
-      </div>
+      {error ? (
+        <div
+          className="w-full bg-black/[0.03] border border-dashed border-black/12 flex items-center justify-center"
+          style={{ aspectRatio: ratio }}
+        >
+          <p className="type-eyebrow text-black/25">{filename}</p>
+        </div>
+      ) : (
+        <img
+          src={`/${filename}`}
+          alt={caption || filename}
+          className="w-full object-cover"
+          style={ratio === "auto" ? undefined : { aspectRatio: ratio }}
+          loading="lazy"
+          decoding="async"
+          onError={() => setError(true)}
+        />
+      )}
       {caption && <p className="font-futura-heavy text-[11px] opacity-30 text-black">{caption}</p>}
     </div>
   );
@@ -393,7 +383,7 @@ export default function SwiftFood() {
         style={{
           position:           "relative",
           height:             "100svh",
-          backgroundImage:    "url(/sfbg.png)",
+          backgroundImage:    "url(/sfbg.webp)",
           backgroundSize:     "cover",
           backgroundPosition: typeof window !== "undefined" && window.innerWidth < 768
             ? `center ${scrollY * 0.1}px`
@@ -479,7 +469,7 @@ export default function SwiftFood() {
           {/* Left — image */}
           <div className="flex flex-col justify-center self-stretch">
             <img
-              src="/sfintro.png"
+              src="/sfintro.webp"
               alt="SwiftFood app on device mockups"
               className="w-full"
               style={{ display: "block" }}
@@ -660,41 +650,10 @@ export default function SwiftFood() {
               </div>
             </div>
 
-            <SubDivider />
-
-            {/* Bottom — paragraph + single full-width image */}
-            <div className="flex flex-col gap-[32px]">
-
-              {/* Paragraph — plain body text, no bold */}
-              <div className="md:w-[50%] flex flex-col gap-[12px]">
-                <p className="type-eyebrow mb-[8px]">Multi-role Platform</p>
-                <p className="type-body">
-                  Swiftfood operates as a multi-role platform composed of distinct user groups and interfaces.
-                </p>
-                <p className="type-body">
-                  Employees order via a mobile app, managers access a control interface, merchants use a fulfilment app, and riders operate a delivery app — all connected through a shared order system.
-                </p>
-              </div>
-
-              {/* Full-width 16:9 image with caption */}
-              <div className="w-full flex flex-col gap-[10px]">
-                <ImagePlaceholder
-                  filename="sf-system-overview.png"
-                  ratio="16/9"
-                />
-                <div className="flex items-start justify-between gap-[16px]">
-                  <p className="type-eyebrow">How the system works</p>
-                  <p className="type-body-sm text-black/40">
-                    One order — four simultaneous realities: employee meal, merchant ticket, rider route, manager budget entry.
-                  </p>
-                </div>
-              </div>
-
-            </div>
           </section>
 
           {/* 02 — Product Evolution */}
-          <section id="s-evolution" className="pt-[40px] md:pt-[56px] pb-[40px] md:pb-[56px] border-b border-black/15">
+          <section id="s-evolution" className="pt-[56px] pb-[256px] border-b border-black/15">
             <SectionLabel>02 — Product Evolution: From individual to catering to B2B2C</SectionLabel>
             <div className="flex flex-col">
 
@@ -707,21 +666,6 @@ export default function SwiftFood() {
                       <div className="w-[8px] h-[8px] rounded-full border border-black/70 bg-my-bg" />
                     </div>
                   ))}
-                </div>
-                {/* Brand double-ring dot at 1/3 — marks the shift from B2C to catering */}
-                <div
-                  className="absolute z-20 group cursor-default"
-                  style={{ left: "calc(33.33% - 8px)", top: "0" }}
-                >
-                  <div
-                    className="rounded-full border border-brand bg-my-bg flex items-center justify-center transition-transform duration-300 ease-out group-hover:scale-[1.6]"
-                    style={{ width: "16px", height: "16px" }}
-                  >
-                    <div
-                      className="rounded-full bg-brand transition-transform duration-300 ease-out group-hover:scale-[0.7]"
-                      style={{ width: "6px", height: "6px" }}
-                    />
-                  </div>
                 </div>
               </div>
 
@@ -799,7 +743,7 @@ export default function SwiftFood() {
           </section>
 
           {/* 02b — Early Exploration */}
-          <section id="s-exploration" className="pt-[40px] md:pt-[56px] pb-[40px] md:pb-[56px] border-b border-black/15">
+          <section id="s-exploration" className="pt-[56px] pb-[256px] border-b border-black/15">
             <SectionLabel>02b — Early Exploration</SectionLabel>
 
             {/* A market-inspired interface — text col 1 | blank col 2 | bullets cols 3-4 */}
@@ -818,7 +762,6 @@ export default function SwiftFood() {
                 <ul className="space-y-[12px]">
                   {[
                     "A map-based entry point instead of a list",
-                    "Poster-style browsing to mimic real market discovery",
                     "Tinder-like swiping for menu navigation",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-[12px]">
@@ -829,9 +772,9 @@ export default function SwiftFood() {
                 </ul>
                 {/* Exploration sketches */}
                 <div className="flex gap-[12px]">
-                  <div className="flex-1"><ImagePlaceholder filename="sf-explore-map.png" caption="Map-based entry" ratio="9/16" /></div>
-                  <div className="flex-1"><ImagePlaceholder filename="sf-explore-poster.png" caption="Poster browsing" ratio="9/16" /></div>
-                  <div className="flex-1"><ImagePlaceholder filename="sf-explore-swipe.png" caption="Swipe navigation" ratio="9/16" /></div>
+                  <div className="flex-1"><ImagePlaceholder filename="sf-explore-map.webp" caption="Map-based entry" ratio="auto" /></div>
+                  <div className="flex-1"><ImagePlaceholder filename="sf-explore-poster.webp" caption="Swipe navigation" ratio="auto" /></div>
+                  <div className="flex-1"><ImagePlaceholder filename="sf-explore-swipe.webp" caption="Swipe navigation" ratio="auto" /></div>
                 </div>
               </div>
             </div>
@@ -863,12 +806,6 @@ export default function SwiftFood() {
 
             <SubDivider />
 
-            <DecisionBlock>
-              I adopted a more familiar structure: list-based browsing, standard navigation, and faster, more predictable interactions.
-            </DecisionBlock>
-
-            <SubDivider />
-
             {/* The trade-off — text col 1 | blank col 2 | content cols 3-4 */}
             <div className="border border-black/20 p-[24px] md:p-[28px] mt-[24px] grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[20px]">
               <div>
@@ -881,6 +818,9 @@ export default function SwiftFood() {
               <div className="md:col-span-2">
                 <p className="type-body mb-[16px]">
                   An expressive interface might have matched the street-market brand, but it would have introduced friction at every point in the ordering flow.
+                </p>
+                <p className="type-body mb-[16px]">
+                  I adopted a more familiar structure: list-based browsing, standard navigation, and faster, more predictable interactions.
                 </p>
                 <p className="type-eyebrow mb-[12px]">I prioritised</p>
                 <div className="flex flex-wrap gap-[8px] mb-[16px]">
@@ -897,7 +837,7 @@ export default function SwiftFood() {
           </section>
 
           {/* 03 — Core Challenge */}
-          <section id="s-challenge" className="pt-[40px] md:pt-[56px] pb-[40px] md:pb-[56px] border-b border-black/15">
+          <section id="s-challenge" className="pt-[56px] pb-[256px] border-b border-black/15">
             <SectionLabel>03 — The Core Challenge</SectionLabel>
 
             {/* Framing — text col 1 | blank col 2 | body cols 3-4 */}
@@ -918,90 +858,41 @@ export default function SwiftFood() {
 
             <SubDivider />
 
-            {/* Role cards — text col 1 | blank col 2 | cards cols 3-4 */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px]">
+            {/* Role cards — full width, 5 columns */}
+            <div className="flex flex-col gap-[16px]">
               <div>
-                <p className="type-eyebrow mb-[16px]">User roles</p>
+                <p className="type-eyebrow mb-[8px]">User roles</p>
                 <p className="type-body">Five distinct roles, each with a different mental model and success criteria.</p>
               </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2">
-                <div className="border border-black/20">
-                  {roles.map((role) => (
-                    <div key={role.name} className="border-b border-black/10 last:border-b-0 p-[20px]">
-                      <div className="flex items-start justify-between gap-[12px] mb-[10px]">
-                        <p className="type-eyebrow">{role.name}</p>
-                        <span className="font-futura-light text-[10px] uppercase tracking-[0.1em] border border-black/15 px-2 py-1 text-black/35 shrink-0">Goal: {role.goal}</span>
-                      </div>
-                      <ul className="space-y-[4px] mb-[12px]">
-                        {role.points.map((pt) => (
-                          <li key={pt} className="flex items-start gap-[8px]">
-                            <span className="type-body-sm text-black/30 shrink-0">→</span>
-                            <p className="type-body-sm">{pt}</p>
-                          </li>
-                        ))}
-                      </ul>
-                      <span className="inline-flex rounded-full border border-black px-3 py-1 type-chip text-black bg-my-bg">{role.pill}</span>
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-[8px]">
+                {roles.map((role) => (
+                  <div key={role.name} className="border border-black/20 p-[20px] flex flex-col gap-[10px]">
+                    <div className="flex flex-col gap-[4px]">
+                      <p className="type-eyebrow">{role.name}</p>
+                      <span className="font-futura-light text-[10px] uppercase tracking-[0.1em] text-black/35">Goal: {role.goal}</span>
                     </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* 04 — Key Design Decisions */}
-          <section id="s-decisions" className="pt-[40px] md:pt-[56px] pb-[40px] md:pb-[56px] border-b border-black/15">
-            <SectionLabel>04 — Key Design Decisions</SectionLabel>
-
-            {/* Intro — text col 1 | blank col 2 | body cols 3-4 */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
-              <div>
-                <p className="type-eyebrow mb-[16px]">Where the real decisions lived</p>
-              </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2">
-                <p className="type-body-key mb-[16px]">
-                  Multi-role systems are hard because optimising for one user often compromises another. These three decisions defined how the system held together.
-                </p>
-                <p className="type-body-sm text-black/40 italic">Each decision balanced user experience with operational constraints.</p>
+                    <ul className="space-y-[4px] flex-1">
+                      {role.points.map((pt) => (
+                        <li key={pt} className="flex items-start gap-[8px]">
+                          <span className="type-body-sm text-black/30 shrink-0">→</span>
+                          <p className="type-body-sm">{pt}</p>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="flex flex-wrap gap-[6px]">
+                      {role.pill.split(" · ").map((tag) => (
+                        <span key={tag} className="inline-flex rounded-full border border-black px-3 py-1 type-chip text-black bg-my-bg">{tag}</span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Decision cards — each as a 4-col grid module */}
-            {decisions.map((d, i) => (
-              <div key={d.number}>
-                <SubDivider />
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px]">
-                  <div>
-                    <p className="type-eyebrow mb-[10px]">Decision {d.number}</p>
-                    <p className="type-subhead mb-[8px]">{d.title}</p>
-                    {d.tension && (
-                      <p className="font-futura-light text-[12px] italic text-black/40 leading-relaxed">{d.tension}</p>
-                    )}
-                    {d.explored && (
-                      <div className="flex flex-wrap gap-[6px] mt-[12px]">
-                        {d.explored.map((opt) => (
-                          <span key={opt} className="font-futura-light text-[10px] uppercase tracking-[0.1em] border border-black/15 px-2 py-1 text-black/40">{opt}</span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                  <div className="hidden md:block" />
-                  <div className="md:col-span-2 flex flex-col gap-[20px]">
-                    <p className="type-body">{d.body}</p>
-                    <DecisionBlock>{d.decision}</DecisionBlock>
-                    <ImagePlaceholder
-                      filename={`sf-decision-0${i + 1}.png`}
-                      caption={d.title}
-                    />
-                  </div>
-                </div>
-              </div>
-            ))}
           </section>
 
           {/* 04b — Design System */}
-          <section id="s-design-system" className="pt-[40px] md:pt-[56px] pb-[40px] md:pb-[56px] border-b border-black/15">
+          <section id="s-design-system" className="pt-[56px] pb-[256px] border-b border-black/15">
             <SectionLabel>04b — Design System</SectionLabel>
 
             {/* Intro — text col 1 | blank col 2 | body cols 3-4 */}
@@ -1036,7 +927,7 @@ export default function SwiftFood() {
                     </li>
                   ))}
                 </ul>
-                <ImagePlaceholder filename="sf-system-tokens.png" caption="Design tokens" />
+                <ImagePlaceholder filename="sf-system-tokens.webp" caption="Design tokens" />
               </div>
             </div>
 
@@ -1050,7 +941,7 @@ export default function SwiftFood() {
               </div>
               <div className="hidden md:block" />
               <div className="md:col-span-2 flex flex-col gap-[20px]">
-                <ImagePlaceholder filename="sf-system-components.png" caption="Component library" />
+                <ImagePlaceholder filename="sf-system-components.webp" caption="Component library" />
               </div>
             </div>
 
@@ -1080,7 +971,7 @@ export default function SwiftFood() {
           </section>
 
           {/* 05 — Designing for Operations */}
-          <section id="s-operations" className="pt-[40px] md:pt-[56px] pb-[40px] md:pb-[56px] border-b border-black/15">
+          <section id="s-operations" className="pt-[56px] pb-[256px] border-b border-black/15">
             <SectionLabel>05 — Designing for Operations</SectionLabel>
 
             {/* Intro — text col 1 | blank col 2 | body cols 3-4 */}
@@ -1130,51 +1021,7 @@ export default function SwiftFood() {
               </div>
               <div className="hidden md:block" />
               <div className="md:col-span-2">
-                {/* Desktop: horizontal timeline */}
-                <div className="hidden md:block relative mt-4 mb-16">
-                  <div className="relative h-[3px] bg-black/10">
-                    {[
-                      { left: "0%",  width: "22%", opacity: "opacity-20" },
-                      { left: "22%", width: "20%", opacity: "opacity-80" },
-                      { left: "42%", width: "8%",  opacity: "opacity-10" },
-                      { left: "50%", width: "30%", opacity: "opacity-40" },
-                      { left: "80%", width: "20%", opacity: "opacity-10" },
-                    ].map((seg, i) => (
-                      <div key={i} className={`absolute top-0 h-full bg-black ${seg.opacity}`} style={{ left: seg.left, width: seg.width }} />
-                    ))}
-                    {[
-                      { left: "22%", label: "Order window opens", time: "11:00" },
-                      { left: "42%", label: "Window closes",      time: "11:30" },
-                      { left: "50%", label: "Rider dispatched",   time: "11:38" },
-                      { left: "80%", label: "Delivered",          time: "12:00" },
-                    ].map((dot) => (
-                      <div key={dot.left} className="absolute" style={{ left: dot.left, transform: "translateX(-50%)" }}>
-                        <div className="w-3 h-3 rounded-full bg-black border-2 border-my-bg -mt-[5px]" />
-                        <div className="absolute top-6 text-center" style={{ transform: "translateX(-50%)", whiteSpace: "nowrap" }}>
-                          <p className="type-eyebrow">{dot.label}</p>
-                          <p className="font-futura-medium text-[13px] text-black">{dot.time}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                {/* Mobile: vertical steps */}
-                <div className="md:hidden flex flex-col gap-0 border-l border-black/20 ml-2">
-                  {[
-                    { label: "Order window opens", time: "11:00" },
-                    { label: "Window closes",      time: "11:30" },
-                    { label: "Rider dispatched",   time: "11:38" },
-                    { label: "Delivered",          time: "12:00" },
-                  ].map((dot) => (
-                    <div key={dot.time} className="flex items-start gap-4 pl-5 py-3 relative">
-                      <div className="absolute left-[-5px] top-[18px] w-[9px] h-[9px] rounded-full bg-black border-2 border-my-bg" />
-                      <div>
-                        <p className="type-eyebrow">{dot.label}</p>
-                        <p className="font-futura-medium text-[14px] text-black">{dot.time}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <ImagePlaceholder filename="sf-ordering-window.webp" caption="Ordering window — desktop" ratio="auto" />
               </div>
             </div>
 
@@ -1201,12 +1048,14 @@ export default function SwiftFood() {
 
             <SubDivider />
 
-            {/* Merchant UI image — full span */}
-            <ImagePlaceholder filename="sf-merchant-ui.png" caption="Merchant tablet UI" ratio="16/9" />
+            {/* Merchant UI image — phone width */}
+            <div className="w-[200px]">
+              <ImagePlaceholder filename="sf-merchant-ui.webp" caption="Merchant mobile UI" ratio="auto" />
+            </div>
           </section>
 
           {/* 06 — Smart Access Control */}
-          <section id="s-access" className="pt-[40px] md:pt-[56px] pb-[40px] md:pb-[56px] border-b border-black/15">
+          <section id="s-access" className="pt-[56px] pb-[256px] border-b border-black/15">
             <SectionLabel>06 — Smart Access Control</SectionLabel>
 
             {/* Intro — text col 1 | blank col 2 | body cols 3-4 */}
@@ -1274,11 +1123,11 @@ export default function SwiftFood() {
             <SubDivider />
 
             {/* Access control UI image */}
-            <ImagePlaceholder filename="sf-access-ui.png" caption="Employee app — locked state + override screen" ratio="16/9" />
+            <ImagePlaceholder filename="sf-access-ui.webp" caption="Employee app — locked state + override screen" ratio="auto" />
           </section>
 
           {/* 07 — Outcomes */}
-          <section id="s-outcomes" className="pt-[40px] md:pt-[56px] pb-[40px] md:pb-[56px] border-b border-black/15">
+          <section id="s-outcomes" className="pt-[56px] pb-[256px] border-b border-black/15">
             <SectionLabel>07 — Outcomes</SectionLabel>
 
             {/* Intro — text col 1 | blank col 2 | body cols 3-4 */}

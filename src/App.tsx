@@ -62,12 +62,12 @@ const navSections = [
 ];
 
 const images = [
-  { img: "./swiftfood.png",     title: "Multi-Sided B2B2C Catering Platform",     slug: "swiftfood"     },
-  { img: "./healthtech.png",    title: "AI-powered Health Tech App", slug: "healthtech"    },
-  { img: "./volunteer.png",     title: "AR Future Volunteer System", slug: "volunteer"     },
-  { img: "./vrlibrary.png",     title: "VR Library of Language Preservation",         slug: "vrlibrary"     },
-  { img: "./cardgame.png",      title: "Gamified System for Cross-Cultural Communication",          slug: "cardgame"      },
-  { img: "./foldablerobot.png", title: "Foldable Robot",     slug: "foldablerobot" },
+  { img: "./swiftfood.webp",     title: "Multi-Sided B2B2C Catering Platform",     slug: "swiftfood"     },
+  { img: "./healthtech.webp",    title: "AI Nutrition for GDM Care", slug: "healthtech"    },
+  { img: "./volunteer.webp",     title: "AR Future Volunteer System", slug: "volunteer"     },
+  { img: "./vrlibrary.webp",     title: "VR Library of Language Preservation",         slug: "vrlibrary"     },
+  { img: "./cardgame.webp",      title: "Gamified System for Cross-Cultural Communication",          slug: "cardgame"      },
+  { img: "./foldablerobot.webp", title: "Foldable Robot",     slug: "foldablerobot" },
 ];
 
 const AUTO_DELAY         = 5000;

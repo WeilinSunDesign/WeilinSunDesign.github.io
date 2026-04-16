@@ -39,7 +39,7 @@ export default function AboutMe() {
       <div className="w-full flex flex-col md:flex-row border-b border-black">
         <div className="w-full md:w-1/2 border-b md:border-b-0 md:border-r border-black">
           <img
-            src="/me.jpg"
+            src="/me.webp"
             alt="Weilin"
             className="w-full h-full object-cover max-h-[70vh] aspect-ratio-[4/3]"
           />

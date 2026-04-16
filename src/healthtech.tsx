@@ -1,44 +1,109 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "./components/Header";
 
 // ── Nav sections ──────────────────────────────────────────────────────────────
 
 const navSections = [
-  { id: "s-casestudy", label: "01 — Case Study" },
+  { id: "s-userresearch",         label: "01 — User Research" },
+  { id: "s-competeana",           label: "02 — Competitive Analysis" },
+  { id: "s-market",               label: "03 — Market Analysis" },
+  { id: "s-solution",             label: "04 — Solution" },
+  { id: "s-informationarchitect", label: "05 — Information Architecture" },
+  { id: "s-userflow",             label: "06 — User Flow" },
+  { id: "s-productexperience",    label: "07 — Product Experience" },
 ];
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
-const heroTags = ["GIS", "Health Data", "Urban Planning", "Data Visualisation", "University Project"];
+const heroTags = ["AI Product", "HealthTech", "Product Design", "AI SaaS", "Startup Concept", "UX Strategy"];
 
 const introDetails: { label: string; value: string | React.ReactNode }[] = [
-  {
-    label: "Overview:",
-    value: "A GIS-based health data visualisation platform mapping disease prevalence, healthcare access, and demographic patterns across London boroughs.",
-  },
-  {
-    label: "The core concept:",
-    value: "Layering epidemiological data onto spatial maps to surface inequalities in healthcare access — turning raw public health datasets into actionable visual insights for planners and policymakers.",
-  },
-  { label: "Duration:", value: "University Project" },
-  { label: "Tools:",    value: "Figma, ArcGIS, QGIS, Python" },
-  { label: "My Role:",  value: "UX Research, Data Visualisation, Interaction Design" },
+  { label: "Role:",     value: "Product Design · UX Research · Concept Development" },
+  { label: "Type:",     value: "Startup Concept / AI Product" },
+  { label: "Duration:", value: "1 month" },
+  { label: "Tools:",    value: "Figma, Google Stitch, Claude Code" },
+  { label: "Focus:",    value: "AI-assisted decision-making · Health data · Personalisation" },
 ];
 
 // ── Case study images ─────────────────────────────────────────────────────────
 
-const caseStudyImages = [
-  { src: "/ht-01.png", alt: "Case study 01" },
-  { src: "/ht-02.png", alt: "Case study 02" },
-  { src: "/ht-03.png", alt: "Case study 03" },
-  { src: "/ht-04.png", alt: "Case study 04" },
-  { src: "/ht-05.png", alt: "Case study 05" },
-  { src: "/ht-06.png", alt: "Case study 06" },
-  { src: "/ht-07.png", alt: "Case study 07" },
-  { src: "/ht-08.png", alt: "Case study 08" },
-  { src: "/ht-09.png", alt: "Case study 09" },
-  { src: "/ht-10.png", alt: "Case study 10" },
+const caseStudyImagesBefore = [
+  { id: "s-userresearch",         src: "/ht-userresearch.webp",        label: "01 — User Research" },
+  { id: "s-competeana",           src: "/ht-competeana.webp",          label: "02 — Competitive Analysis" },
+  { id: "s-market",               src: "/ht-market1.webp",             label: "03 — Market Analysis" },
+  { id: "s-solution",             src: "/ht-solution.webp",            label: "04 — Solution" },
+  { id: "s-informationarchitect", src: "/ht-informationarchitect.webp",label: "05 — Information Architecture" },
+  { id: "s-userflow",             src: "/ht-userflow2.webp",           label: "06 — User Flow" },
+];
+
+// ── Product Experience data ───────────────────────────────────────────────────
+
+const productExperienceItems = [
+  {
+    num: "01",
+    title: "A calm entry point to daily health",
+    images: ["/Tracking & Logs.webp"],
+    paragraphs: [
+      "Rather than presenting medical data as alerts or warnings, the system reframes glucose tracking into a calm daily rhythm — reducing anxiety while maintaining awareness.",
+      "Real-time glucose data is continuously interpreted in the background, allowing the interface to surface only what matters in the moment, without overwhelming the user.",
+    ],
+  },
+  {
+    num: "02",
+    title: "From data \u2192 decision",
+    images: ["/conversation.webp", "/Your Morning Glow.webp", "/Nourishing Suggestions.webp"],
+    paragraphs: [
+      "Instead of leaving users to interpret numbers, the system translates glucose readings into actionable guidance through a conversational interface.",
+      "Based on real-time glucose levels and user context, the system generates personalized suggestions — helping users understand not just what to eat, but why.",
+      "This interaction model allows users to move seamlessly from \u201cwhat is happening\u201d to \u201cwhat should I do next,\u201d reducing cognitive load and decision fatigue.",
+    ],
+  },
+  {
+    num: "03",
+    title: "Making nutrition understandable",
+    images: ["/Recipe Details.webp"],
+    paragraphs: [
+      "Nutritional complexity is simplified into clear, structured information.",
+      "The system not only presents nutritional values, but also interprets them — explaining why each meal supports stable glucose levels in a way that is accessible without medical expertise.",
+    ],
+  },
+  {
+    num: "04",
+    title: "Bridging recommendation with real-world action",
+    images: ["/Shopping List.webp"],
+    paragraphs: [
+      "Recommendations are directly connected to execution.",
+      "Suggested meals are automatically translated into structured shopping lists, enabling users to move from personalized guidance to real-world action without friction.",
+    ],
+  },
+  {
+    num: "05",
+    title: "Structuring long-term care journeys",
+    images: ["/Welcome to Lullaby & Bloom.webp", "/Profile & Settings.webp"],
+    paragraphs: [
+      "The system structures a long-term pregnancy journey into manageable milestones.",
+      "Health targets adapt to the user\u2019s stage and condition, ensuring that guidance remains relevant and supportive throughout the experience.",
+    ],
+  },
+  {
+    num: "06",
+    title: "Extending care beyond the individual",
+    images: ["/Family Circle.webp"],
+    paragraphs: [
+      "Care is extended beyond the individual through a shared support system.",
+      "The system surfaces meaningful updates that allow partners and family members to participate actively in the journey.",
+    ],
+  },
+  {
+    num: "07",
+    title: "Supporting habit formation",
+    images: ["/Meal Planner.webp"],
+    paragraphs: [
+      "Rather than focusing on one-time interactions, the system supports continuous habit formation.",
+      "Meal planning evolves based on user patterns and preferences, helping build sustainable routines aligned with both health goals and daily life.",
+    ],
+  },
 ];
 
 // ── Sidebar nav ───────────────────────────────────────────────────────────────
@@ -129,19 +194,32 @@ function SidebarNav({
 // ── Page ───────────────────────────────────────────────────────────────────────
 
 export default function HealthTechPage() {
-  const [scrollY, setScrollY]         = useState(0);
   const [activeSection, setActive]    = useState(navSections[0].id);
   const [showSidebar, setShowSidebar] = useState(false);
   const [titleH, setTitleH]           = useState(0);
   const caseStudyRef                  = useRef<HTMLDivElement>(null);
   const titleBlockRef                 = useRef<HTMLDivElement>(null);
+  const heroRef                       = useRef<HTMLElement>(null);
+  const arrowRef                      = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => {
+  // Scroll to top before first paint — prevents visible jump on refresh
+  useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  // Drive parallax + arrow visibility directly on the DOM — no re-renders
   useEffect(() => {
-    const onScroll = () => setScrollY(window.scrollY);
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (heroRef.current) {
+        const offset = window.innerWidth < 768 ? y * 0.1 : y * 0.22;
+        heroRef.current.style.backgroundPosition = `center ${offset}px`;
+      }
+      if (arrowRef.current) {
+        arrowRef.current.style.opacity       = y > 0 ? "0" : "1";
+        arrowRef.current.style.pointerEvents = y > 0 ? "none" : "auto";
+      }
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -200,14 +278,13 @@ export default function HealthTechPage() {
           SCREEN 1 — HERO
       ══════════════════════════════════════════════ */}
       <section
+        ref={heroRef}
         style={{
           position:           "relative",
           height:             "100svh",
-          backgroundImage:    "url(/htbg.png)",
+          backgroundImage:    "url(/htbg.webp)",
           backgroundSize:     "cover",
-          backgroundPosition: typeof window !== "undefined" && window.innerWidth < 768
-            ? `center ${scrollY * 0.1}px`
-            : `center ${scrollY * 0.22}px`,
+          backgroundPosition: "center 0px",
           backgroundRepeat:   "no-repeat",
         }}
       >
@@ -223,7 +300,7 @@ export default function HealthTechPage() {
               marginBottom: "0",
             }}
           >
-            GIS Health Data Visualisation for Urban Planning
+            Building an AI-driven nutrition platform for gestational diabetes management
           </h1>
 
           <div className="flex flex-wrap gap-2 mt-[20px] md:mt-[32px]">
@@ -244,13 +321,13 @@ export default function HealthTechPage() {
             const headerH = window.innerWidth >= 768 ? 64 : 48;
             window.scrollTo({ top: window.innerHeight - titleH - headerH, behavior: "smooth" });
           }}
+          ref={arrowRef}
           aria-label="Scroll down"
           className="absolute left-1/2 -translate-x-1/2 bottom-[28px] flex items-center justify-center rounded-full bg-my-bg border border-black/25 group hover:border-brand transition-colors duration-200"
           style={{
             width: "44px", height: "44px", cursor: "pointer",
-            opacity:       scrollY > 0 ? 0 : 1,
-            pointerEvents: scrollY > 0 ? "none" : "auto",
-            transition:    "opacity 0.3s ease",
+            opacity:    "1",
+            transition: "opacity 0.3s ease",
           }}
         >
           <svg
@@ -281,7 +358,7 @@ export default function HealthTechPage() {
           {/* Left — image */}
           <div className="flex flex-col justify-center self-stretch">
             <img
-              src="/htintro.png"
+              src="/htintro.webp"
               alt="HealthTech data visualisation"
               className="w-full"
               style={{ display: "block" }}
@@ -320,16 +397,17 @@ export default function HealthTechPage() {
 
         <div className="w-full px-[24px] md:px-[192px] pb-[80px]">
 
-          <section id="s-casestudy">
-            <div className="border-t border-black/15 mb-[8px]" />
-            <p className="type-section-nav mb-[32px] md:mb-[48px]">01 — Case Study</p>
-
+          {/* ── Research → User Flow ── */}
+          <section>
+            <div className="border-t border-black/15 mb-[24px]" />
             <div className="flex flex-col gap-[24px]">
-              {caseStudyImages.map((img, i) => (
-                <div key={i} className="w-full">
+              {caseStudyImagesBefore.map((img) => (
+                <div key={img.id} id={img.id} className="w-full">
                   <img
                     src={img.src}
-                    alt={img.alt}
+                    alt={img.label}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full block"
                     style={{ aspectRatio: "16/9", objectFit: "cover" }}
                   />
@@ -337,6 +415,62 @@ export default function HealthTechPage() {
               ))}
             </div>
           </section>
+
+          {/* ── 07 — Product Experience ── */}
+          <section id="s-productexperience" className="pt-[40px] md:pt-[56px] mt-[24px]">
+            <div className="border-t border-black/15 mb-[8px]" />
+            <p className="type-section-nav mb-[20px] md:mb-[28px]">07 — Product Experience</p>
+            <p className="type-body mb-[40px] md:mb-[56px]">
+              The product is designed not as a tracking tool, but as an adaptive decision-support system — continuously learning from user data to reduce cognitive load and support both physical health and emotional wellbeing.
+            </p>
+
+            {productExperienceItems.map((item, i) => (
+              <div key={item.num}>
+                {i > 0 && <div className="border-t border-black/[0.07] mt-[40px] mb-[8px]" />}
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-[48px] gap-y-[24px] mt-[40px] items-start">
+
+                  {/* Left — title + text */}
+                  <div className="flex flex-col gap-[16px]">
+                    <div>
+                      <p
+                        className="font-inria-serif text-black leading-[1.15]"
+                        style={{ fontSize: "clamp(1rem, 1.8vw, 1.4rem)" }}
+                      >
+                        {item.title}
+                      </p>
+                    </div>
+                    <div className="flex flex-col gap-[10px]">
+                      {item.paragraphs.map((p, j) => (
+                        <p key={j} className="type-body">{p}</p>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Right — images only */}
+                  <div className="flex gap-[12px] items-start">
+                    {item.images.map((src) => (
+                      <img
+                        key={src}
+                        src={src}
+                        alt={item.title}
+                        loading="lazy"
+                        decoding="async"
+                        className="block rounded-[8px]"
+                        style={{
+                          width:  "calc(33.33% - 8px)",
+                          height: "auto",
+                        }}
+                      />
+                    ))}
+                  </div>
+
+                </div>
+              </div>
+            ))}
+
+          </section>
+
 
           {/* Back link */}
           <div className="pt-[48px]">

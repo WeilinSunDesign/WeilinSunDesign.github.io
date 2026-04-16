@@ -31,7 +31,7 @@ jobs:
       - run: npm ci
 
       - name: Build
-        run: npx vite build --base=/weilinportfolio.github.io/
+        run: npx vite build --base=/
 
       - uses: actions/configure-pages@v4
 

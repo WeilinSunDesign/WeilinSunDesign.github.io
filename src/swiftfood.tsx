@@ -8,12 +8,9 @@ const navSections = [
   { id: "s-context",       label: "01 — Overview" },
   { id: "s-evolution",     label: "02 — Evolution" },
   { id: "s-exploration",   label: "02b — Exploration" },
-  { id: "s-challenge",     label: "03 — Challenge" },
-  { id: "s-decisions",     label: "04 — Decisions" },
-  { id: "s-design-system", label: "04b — Design System" },
-  { id: "s-operations",    label: "05 — Operations" },
-  { id: "s-access",        label: "06 — Access Control" },
-  { id: "s-outcomes",      label: "07 — Outcomes" },
+  { id: "s-challenge",     label: "03 — Individual Ordering" },
+  { id: "s-design-system", label: "04 — Merchants" },
+  { id: "s-operations",    label: "05 — Corporate" },
 ];
 
 // ── Data ──────────────────────────────────────────────────────────────────────
@@ -68,56 +65,6 @@ const phases = [
   },
 ];
 
-const roles = [
-  {
-    name: "Employee",
-    goal: "Speed and ease",
-    points: ["Personal lunch choice", "Fast, low-friction ordering", "Discovery without constraint"],
-    pill: "Mobile app · primary consumer experience",
-  },
-  {
-    name: "Manager",
-    goal: "Budget control",
-    points: ["Monitor team spending", "Set individual allowances", "Oversight — not ordering"],
-    pill: "B2B portal · team budget & spend tracking",
-  },
-  {
-    name: "Merchant",
-    goal: "Operational feasibility",
-    points: ["A production queue", "Real-time menu and order management", "Time-sensitive at peak hours"],
-    pill: "Tablet portal · order & menu management",
-  },
-  {
-    name: "Rider",
-    goal: "Efficiency and clarity",
-    points: ["Multi-stop pickup route", "Mixed-basket means multiple stalls per order", "Minimum cognitive load"],
-    pill: "Mobile app · task execution · low cognitive load",
-    wide: true,
-  },
-  {
-    name: "Company",
-    goal: "Cost structure",
-    points: ["Budget framework — executed through Manager", "No independent portal needed", "Separate portal would add onboarding friction with no UX gain"],
-    pill: "No independent portal — managed through Manager",
-    wide: true,
-  },
-];
-
-
-const merchantPrinciples = [
-  { title: "One screen, one task",         body: "Merchants see only current orders for their stall, displayed as large ticket cards. No navigation — just what needs to be cooked now." },
-  { title: "No typing required",           body: "Accepting an order, marking ready, and flagging an issue are single taps. Every interaction is binary: confirm or flag." },
-  { title: "Loud, unmissable alerts",      body: "New orders trigger a full-screen alert with audio. Merchants are cooking — the notification had to be impossible to miss." },
-  { title: "Error recovery over precision", body: "If a merchant dismisses an order accidentally, they can recover within 60 seconds. The interface is robust to human error." },
-];
-
-const outcomes = [
-  { stat: "1,000+",  label: "Orders in first week" },
-  { stat: "2×",      label: "Merchant growth" },
-  { stat: "2×",      label: "Weekly orders after optimisation" },
-  { stat: "~£7,000", label: "GMV in first 3 months" },
-];
-
 // ── Sub-components ─────────────────────────────────────────────────────────────
 
 function SectionLabel({ children }: { children: string }) {
@@ -128,15 +75,6 @@ function SectionLabel({ children }: { children: string }) {
   );
 }
 
-
-function DecisionBlock({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="border-l-2 border-black pl-5 py-1 my-6 bg-black/[0.02]">
-      <p className="type-eyebrow mb-2">Design decision</p>
-      <p className="type-body-key">{children}</p>
-    </div>
-  );
-}
 
 function TreeNode({ label, sub }: { label: string; sub?: string }) {
   return (
@@ -197,15 +135,6 @@ function ImagePlaceholder({ filename, caption, ratio = "auto" }: { filename: str
         />
       )}
       {caption && <p className="font-futura-heavy text-[11px] opacity-30 text-black">{caption}</p>}
-    </div>
-  );
-}
-
-function InsightBlock({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="border border-black/20 p-5 md:p-6 my-4 flex flex-col md:flex-row gap-2 md:gap-5">
-      <span className="type-eyebrow whitespace-nowrap md:mt-[2px]">{label}</span>
-      <p className="font-futura-medium text-[14px] md:text-[15px] leading-relaxed text-black">{children}</p>
     </div>
   );
 }
@@ -519,11 +448,11 @@ export default function SwiftFood() {
               <div>
                 <p className="type-eyebrow md:text-[14px] mb-[20px]">Product Ecosystem</p>
                 <p className="type-body">
-                  Swiftfood evolved from a consumer-focused delivery concept into a multi-line service ecosystem, spanning individual ordering, catering, and corporate lunch — all supported by a shared operational backbone.
+                  Swiftfood operates across three parallel services — individual ordering, catering, and corporate — each addressing different use cases and user needs.
                 </p>
               </div>
               <div className="md:col-span-3 flex flex-col items-center gap-0 w-full">
-                <TreeNode label="Swiftfood Product Ecosystem" />
+                <TreeNode label="Swiftfood Platform" />
                 <TreeConnector count={3} />
                 <div className="flex items-start gap-[12px] w-full">
                   <div className="flex flex-col items-center flex-1 min-w-0">
@@ -532,44 +461,21 @@ export default function SwiftFood() {
                     <TreeNode label="Consumer App" sub="Mobile" />
                   </div>
                   <div className="flex flex-col items-center flex-1 min-w-0">
-                    <TreeNode label="Catering & Event Ordering" />
+                    <TreeNode label="Catering & Events" />
                     <TreePipe />
                     <TreeNode label="Catering Web" sub="Desktop" />
                   </div>
                   <div className="flex flex-col items-center flex-1 min-w-0">
-                    <TreeNode label="Corporate Office Ordering (B2B2C)" />
+                    <TreeNode label="Corporate (B2B2C)" />
                     <TreeConnector count={2} />
                     <div className="flex items-start gap-[8px] w-full">
                       <div className="flex flex-col items-center flex-1 min-w-0">
-                        <TreeNode label="Manager View" />
+                        <TreeNode label="Manager Interface" />
                       </div>
                       <div className="flex flex-col items-center flex-1 min-w-0">
-                        <TreeNode label="Employee View" />
+                        <TreeNode label="Employee App" />
                       </div>
                     </div>
-                  </div>
-                </div>
-                <div className="w-full border-t border-black/10 border-dashed my-[20px]" />
-                <TreeNode label="Shared Operational Layer" />
-                <TreeConnector count={3} />
-                <div className="flex items-start gap-[12px] w-full">
-                  <div className="flex flex-col items-center flex-1 min-w-0">
-                    <TreeNode label="Merchant App" sub="Mobile" />
-                    <TreeConnector count={2} />
-                    <div className="flex items-start gap-[8px] w-full">
-                      <div className="flex flex-col items-center flex-1 min-w-0">
-                        <TreeNode label="Manager View" />
-                      </div>
-                      <div className="flex flex-col items-center flex-1 min-w-0">
-                        <TreeNode label="Order View" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-center flex-1 min-w-0">
-                    <TreeNode label="Rider App" sub="Mobile" />
-                  </div>
-                  <div className="flex flex-col items-center flex-1 min-w-0">
-                    <TreeNode label="Order Management System" />
                   </div>
                 </div>
               </div>
@@ -836,390 +742,176 @@ export default function SwiftFood() {
 
           </section>
 
-          {/* 03 — Core Challenge */}
+          {/* 03 — Individual Ordering */}
           <section id="s-challenge" className="pt-[56px] pb-[256px] border-b border-black/15">
-            <SectionLabel>03 — The Core Challenge</SectionLabel>
-
-            {/* Framing — text col 1 | blank col 2 | body cols 3-4 */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
-              <div>
-                <p className="type-eyebrow mb-[16px]">Multiple roles, conflicting goals</p>
-                <p className="type-body">Each role optimises for something different. Improving one often degrades another.</p>
-              </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2">
-                <p className="type-body-key mb-[16px]">
-                  The problem was reframed:{" "}
-                  <em className="font-inria-serif">how can one system support multiple truths simultaneously?</em>
-                </p>
-                <p className="type-body-sm text-black/40 italic">This was a system decision, not a UI optimisation.</p>
-              </div>
-            </div>
-
-            <SubDivider />
-
-            {/* Role cards — full width, 5 columns */}
-            <div className="flex flex-col gap-[16px]">
-              <div>
-                <p className="type-eyebrow mb-[8px]">User roles</p>
-                <p className="type-body">Five distinct roles, each with a different mental model and success criteria.</p>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-5 gap-[8px]">
-                {roles.map((role) => (
-                  <div key={role.name} className="border border-black/20 p-[20px] flex flex-col gap-[10px]">
-                    <div className="flex flex-col gap-[4px]">
-                      <p className="type-eyebrow">{role.name}</p>
-                      <span className="font-futura-light text-[10px] uppercase tracking-[0.1em] text-black/35">Goal: {role.goal}</span>
-                    </div>
-                    <ul className="space-y-[4px] flex-1">
-                      {role.points.map((pt) => (
-                        <li key={pt} className="flex items-start gap-[8px]">
-                          <span className="type-body-sm text-black/30 shrink-0">→</span>
-                          <p className="type-body-sm">{pt}</p>
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="flex flex-wrap gap-[6px]">
-                      {role.pill.split(" · ").map((tag) => (
-                        <span key={tag} className="inline-flex rounded-full border border-black px-3 py-1 type-chip text-black bg-my-bg">{tag}</span>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-          </section>
-
-          {/* 04b — Design System */}
-          <section id="s-design-system" className="pt-[56px] pb-[256px] border-b border-black/15">
-            <SectionLabel>04b — Design System</SectionLabel>
+            <SectionLabel>03 — Individual ordering</SectionLabel>
 
             {/* Intro — text col 1 | blank col 2 | body cols 3-4 */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
               <div>
-                <p className="type-eyebrow mb-[16px]">A unified system across platforms</p>
+                <p className="type-eyebrow mb-[16px]">The baseline</p>
+                <p className="type-body">The product started with a simple consumer flow focused on individual ordering.</p>
               </div>
               <div className="hidden md:block" />
               <div className="md:col-span-2">
-                <p className="type-body-key">
-                  To support a multi-role, multi-platform product, I established a unified design system
-                  across all interfaces.
+                <p className="type-body-key mb-[16px]">
+                  Users browse food by market, select items from multiple vendors, and place a single combined order.
+                </p>
+                <p className="type-body">
+                  A key concept introduced early on: <span className="font-futura-medium">one delivery fee per market.</span>
                 </p>
               </div>
             </div>
 
             <SubDivider />
 
-            {/* Design tokens — text col 1 | blank col 2 | content cols 3-4 */}
+            {/* Design focus — text col 1 | blank col 2 | images cols 3-4 */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
               <div>
-                <p className="type-eyebrow mb-[16px]">Design tokens</p>
-                <p className="type-body">A shared foundation of typography, colour, and spacing applied consistently across every product surface.</p>
-              </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2 flex flex-col gap-[20px]">
-                <ul className="space-y-[10px]">
-                  {["Typography scale", "Colour system", "Spacing and layout grid"].map((item) => (
-                    <li key={item} className="flex items-start gap-[12px]">
-                      <span className="w-[4px] h-[4px] rounded-full bg-black/25 mt-[8px] flex-shrink-0" />
-                      <p className="type-body">{item}</p>
+                <p className="type-eyebrow mb-[16px]">Design focus</p>
+                <p className="type-body mb-[16px]">This concept was reinforced across the key journey:</p>
+                <ul className="space-y-[8px]">
+                  {["Homepage", "Market view", "Cart"].map((item) => (
+                    <li key={item} className="flex items-start gap-[10px]">
+                      <span className="w-[4px] h-[4px] rounded-full bg-black/25 mt-[7px] flex-shrink-0" />
+                      <p className="type-body-sm">{item}</p>
                     </li>
                   ))}
                 </ul>
-                <ImagePlaceholder filename="sf-system-tokens.webp" caption="Design tokens" />
-              </div>
-            </div>
-
-            <SubDivider />
-
-            {/* Reusable components — text col 1 | blank col 2 | content cols 3-4 */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
-              <div>
-                <p className="type-eyebrow mb-[16px]">Reusable components</p>
-                <p className="type-body">Components shared across mobile and desktop, adapted per platform without diverging in logic.</p>
               </div>
               <div className="hidden md:block" />
-              <div className="md:col-span-2 flex flex-col gap-[20px]">
-                <ImagePlaceholder filename="sf-system-components.webp" caption="Component library" />
+              <div className="md:col-span-2 flex gap-[12px]">
+                <div className="flex-1"><ImagePlaceholder filename="sf-b2c-home.webp" caption="Homepage — entry point for market-based browsing" ratio="auto" /></div>
+                <div className="flex-1"><ImagePlaceholder filename="sf-b2c-market.webp" caption="Market — multi-vendor selection within one context" ratio="auto" /></div>
+                <div className="flex-1"><ImagePlaceholder filename="sf-b2c-cart.webp" caption="Cart — unified checkout with one delivery fee" ratio="auto" /></div>
               </div>
             </div>
 
             <SubDivider />
 
-            {/* Interaction patterns + outcome — text col 1 | blank col 2 | content cols 3-4 */}
+            {/* Closing note */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px]">
-              <div>
-                <p className="type-eyebrow mb-[16px]">Consistent interaction patterns</p>
-                <p className="type-body">Employee, manager, merchant, and rider interfaces share the same interaction logic, built on a single underlying system.</p>
-              </div>
+              <div className="hidden md:block" />
               <div className="hidden md:block" />
               <div className="md:col-span-2">
-                <div className="border border-black/20 p-[20px]">
-                  <p className="type-eyebrow mb-[12px]">All products built on one system</p>
-                  <div className="flex flex-wrap gap-[8px]">
-                    {["Employee", "Manager", "Merchant", "Rider"].map((role) => (
-                      <span key={role} className="inline-flex rounded-full border border-black px-3 py-1 type-chip text-black bg-my-bg">{role}</span>
-                    ))}
-                  </div>
-                  <p className="type-body mt-[16px]">
-                    The design system was not a UI layer — it was the foundation for scaling the product across roles and platforms.
-                  </p>
-                </div>
+                <p className="type-body-sm text-black/40 italic">This established a clear and simple baseline for the product experience.</p>
               </div>
             </div>
+
           </section>
 
-          {/* 05 — Designing for Operations */}
-          <section id="s-operations" className="pt-[56px] pb-[256px] border-b border-black/15">
-            <SectionLabel>05 — Designing for Operations</SectionLabel>
+          {/* 04 — Designing for Merchants */}
+          <section id="s-design-system" className="pt-[56px] pb-[256px] border-b border-black/15">
+            <SectionLabel>04 — Designing for merchants</SectionLabel>
 
             {/* Intro — text col 1 | blank col 2 | body cols 3-4 */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
-              <div>
-                <p className="type-eyebrow mb-[16px]">Merchant experience</p>
-                <p className="type-body">Designing for reality, not ideal workflows.</p>
-              </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2">
-                <p className="type-body-key mb-[16px]">
-                  Merchants operate in low-tech environments and high-pressure workflows. I designed for reality, not ideal conditions.
-                </p>
-                <p className="type-body-sm text-black/40 italic">This balanced user experience with operational constraints.</p>
-              </div>
-            </div>
-
-            <SubDivider />
-
-            {/* The constraint — text col 1 | blank col 2 | content cols 3-4 */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
               <div>
                 <p className="type-eyebrow mb-[16px]">The constraint</p>
+                <p className="type-body">The system had to adapt to real-world constraints.</p>
               </div>
               <div className="hidden md:block" />
               <div className="md:col-span-2">
-                <p className="type-subhead mb-[12px]">Street food prep is slow. Delivery timing is unforgiving.</p>
-                <p className="type-body-key">
-                  Unlike restaurant kitchens, a street food stall has one or two people, limited equipment,
-                  and no mise en place. On-demand ordering would require merchants to be ready to cook at
-                  any moment — operationally impossible.
-                </p>
-              </div>
-            </div>
-
-            <SubDivider />
-
-            {/* Ordering window — text col 1 | blank col 2 | timeline cols 3-4 */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
-              <div>
-                <p className="type-eyebrow mb-[16px]">The ordering window model</p>
-                <p className="type-body">
-                  Instead of on-demand ordering, I introduced fixed time windows. This enabled batch
-                  preparation, lower stress, and more reliable delivery — a service design decision, not a
-                  UX decision.
-                </p>
-              </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2">
-                <ImagePlaceholder filename="sf-ordering-window.webp" caption="Ordering window — desktop" ratio="auto" />
-              </div>
-            </div>
-
-            <SubDivider />
-
-            {/* Interaction principles — text col 1 | blank col 2 | cards cols 3-4 */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
-              <div>
-                <p className="type-eyebrow mb-[16px]">Interaction principles</p>
-              </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2">
-                <div className="border border-black/20">
-                  {merchantPrinciples.map((p) => (
-                    <div key={p.title} className="border-b border-black/10 last:border-b-0 p-[20px]">
-                      <p className="type-eyebrow mb-[8px]">Principle</p>
-                      <p className="type-subhead mb-[10px]">{p.title}</p>
-                      <p className="type-body">{p.body}</p>
-                    </div>
+                <p className="type-body-key mb-[16px]">Most merchants are small street food vendors:</p>
+                <ul className="space-y-[8px]">
+                  {[
+                    "Limited staff (often 1–2 people)",
+                    "No dedicated workspace",
+                    "No desktop setup",
+                    "High-pressure, time-sensitive environment",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-[10px]">
+                      <span className="w-[4px] h-[4px] rounded-full bg-black/25 mt-[7px] flex-shrink-0" />
+                      <p className="type-body-sm">{item}</p>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
             </div>
 
             <SubDivider />
 
-            {/* Merchant UI image — phone width */}
-            <div className="w-[200px]">
-              <ImagePlaceholder filename="sf-merchant-ui.webp" caption="Merchant mobile UI" ratio="auto" />
-            </div>
-          </section>
-
-          {/* 06 — Smart Access Control */}
-          <section id="s-access" className="pt-[56px] pb-[256px] border-b border-black/15">
-            <SectionLabel>06 — Smart Access Control</SectionLabel>
-
-            {/* Intro — text col 1 | blank col 2 | body cols 3-4 */}
+            {/* Design decision — text col 1 | blank col 2 | content cols 3-4 */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
               <div>
-                <p className="type-eyebrow mb-[16px]">Clock-in integration</p>
-                <p className="type-body">Solving hybrid work automatically.</p>
+                <p className="type-eyebrow mb-[16px]">Design decision</p>
               </div>
               <div className="hidden md:block" />
               <div className="md:col-span-2">
                 <p className="type-body-key mb-[16px]">
-                  London's hybrid work model created a specific UX problem: companies pay for lunches only on office days. Managing this manually was unsustainable for managers.
+                  Instead of building a desktop-first system, we designed a mobile-first merchant experience.
                 </p>
-                <p className="type-body-sm text-black/40 italic">This was a system decision, not a UI optimisation.</p>
-              </div>
-            </div>
-
-            <SubDivider />
-
-            {/* How it works — text col 1 | blank col 2 | cards cols 3-4 */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
-              <div>
-                <p className="type-eyebrow mb-[16px]">How it works</p>
-              </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2">
-                <div className="border border-black/20">
+                <p className="type-body mb-[24px]">
+                  Merchants are provided with a tablet / POS device running a simplified fulfilment app.
+                </p>
+                <p className="type-eyebrow mb-[12px]">This approach:</p>
+                <ul className="space-y-[8px] mb-[24px]">
                   {[
-                    { eyebrow: "Daily · Automatic", title: "Clock-in sync",    body: "Company's HR / attendance system syncs with the platform each morning." },
-                    { eyebrow: "Result · In office",  title: "Access granted",  body: "In-office employees automatically unlock the ordering window. No manager action needed." },
-                    { eyebrow: "Result · Remote",     title: "Access withheld", body: "Remote or absent employees see the app but cannot order. No manual intervention required." },
-                  ].map((c) => (
-                    <div key={c.title} className="border-b border-black/10 last:border-b-0 p-[20px]">
-                      <p className="type-eyebrow mb-[8px]">{c.eyebrow}</p>
-                      <p className="type-subhead mb-[8px]">{c.title}</p>
-                      <p className="type-body-sm">{c.body}</p>
-                    </div>
+                    "Reduces learning cost",
+                    "Eliminates the need for additional hardware",
+                    "Fits into existing workflows",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-[10px]">
+                      <span className="w-[4px] h-[4px] rounded-full bg-black/25 mt-[7px] flex-shrink-0" />
+                      <p className="type-body-sm">{item}</p>
+                    </li>
                   ))}
+                </ul>
+                <div className="border-l-2 border-brand pl-[12px] py-[2px]">
+                  <p className="type-body-sm text-brand">We designed for reality, not ideal workflows.</p>
                 </div>
               </div>
             </div>
 
             <SubDivider />
 
-            {/* Edge case + decision — text col 1 | blank col 2 | content cols 3-4 */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
-              <div>
-                <p className="type-eyebrow mb-[16px]">Edge case</p>
-              </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2 flex flex-col gap-[20px]">
-                <InsightBlock label="→ Edge case">
-                  Employees who come into the office unexpectedly, or whose clock-in fails to sync, needed a
-                  way out. The solution was a self-serve override — employees can manually mark themselves as
-                  "in office today," which triggers a one-tap manager notification (not approval — just visibility).
-                </InsightBlock>
-                <DecisionBlock>
-                  The override was designed as a notification, not an approval flow. Requiring manager sign-off
-                  would shift the cognitive burden back to the manager — defeating the purpose of
-                  automation. Trust is the default; the manager can audit after the fact if needed.
-                </DecisionBlock>
+            {/* Merchant UI — 4 images, same individual width as B2C, centered */}
+            <div className="flex justify-center">
+              <div className="w-2/3 flex gap-[12px]">
+                <div className="flex-1"><ImagePlaceholder filename="merchant-stall.webp" caption="Merchant stall" ratio="auto" /></div>
+                <div className="flex-1"><ImagePlaceholder filename="merchant-data.webp" caption="Order data" ratio="auto" /></div>
+                <div className="flex-1"><ImagePlaceholder filename="merchant-revenue.webp" caption="Revenue" ratio="auto" /></div>
+                <div className="flex-1"><ImagePlaceholder filename="sf-merchant-ui.webp" caption="Merchant app" ratio="auto" /></div>
               </div>
             </div>
 
-            <SubDivider />
-
-            {/* Access control UI image */}
-            <ImagePlaceholder filename="sf-access-ui.webp" caption="Employee app — locked state + override screen" ratio="auto" />
           </section>
 
-          {/* 07 — Outcomes */}
-          <section id="s-outcomes" className="pt-[56px] pb-[256px] border-b border-black/15">
-            <SectionLabel>07 — Outcomes</SectionLabel>
+          {/* 05 — Corporate */}
+          <section id="s-operations" className="pt-[56px] pb-[256px] border-b border-black/15">
+            <SectionLabel>05 — Corporate — where complexity emerges</SectionLabel>
 
             {/* Intro — text col 1 | blank col 2 | body cols 3-4 */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
               <div>
-                <p className="type-eyebrow mb-[16px]">Results after launch</p>
+                <p className="type-eyebrow mb-[16px]">Where complexity emerges</p>
+                <p className="type-body">While the product spans multiple services, the real complexity emerges in the corporate system.</p>
               </div>
               <div className="hidden md:block" />
               <div className="md:col-span-2">
-                <p className="type-body-key">The platform launched in London. Key metrics from the first three months of operation.</p>
+                <p className="type-body-key mb-[16px]">
+                  Here, the system shifts from a single-user experience to a multi-role platform.
+                </p>
+                <p className="type-subhead mb-[16px]">A single order is interpreted differently by each role.</p>
+                <p className="type-body">
+                  This introduces a fundamentally different design problem: not interface design, but system design.
+                </p>
               </div>
             </div>
 
             <SubDivider />
 
-            {/* Stats — text col 1 | blank col 2 | stats cols 3-4 */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
-              <div>
-                <p className="type-eyebrow mb-[16px]">Key metrics</p>
+
+            {/* Corporate desktop UI — 2 images side by side */}
+            <div className="flex gap-[12px]">
+              <div className="flex-1">
+                <ImagePlaceholder filename="sf-decision-01.webp" caption="Employee view" ratio="auto" />
               </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2">
-                <div className="grid grid-cols-2 gap-0 border border-black/20">
-                  {outcomes.map((o) => (
-                    <div key={o.label} className="border-b border-r border-black/10 p-[20px] text-center">
-                      <p className="font-inria-serif text-[clamp(2rem,3.5vw,3rem)] leading-none tracking-tight text-black mb-[8px]">{o.stat}</p>
-                      <p className="type-eyebrow">{o.label}</p>
-                    </div>
-                  ))}
-                </div>
+              <div className="flex-1">
+                <ImagePlaceholder filename="sf-decision-02.webp" caption="Manager view" ratio="auto" />
               </div>
             </div>
 
-            <SubDivider />
-
-            {/* Learnings — text col 1 | blank col 2 | two lists cols 3-4 */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
-              <div>
-                <p className="type-eyebrow mb-[16px]">Learnings</p>
-              </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2">
-                <div className="border border-black/20">
-                  <div className="border-b border-black/10 p-[20px]">
-                    <p className="type-eyebrow mb-[12px]">What this demonstrates</p>
-                    <ul className="space-y-[8px]">
-                      {[
-                        "A single system can support multiple roles without fragmentation",
-                        "System-level decisions outperform UI optimisation",
-                        "Product evolution defines design complexity",
-                      ].map((item) => (
-                        <li key={item} className="flex items-start gap-[10px]">
-                          <span className="font-futura-light text-[11px] text-black/30 mt-[3px]">—</span>
-                          <p className="type-body">{item}</p>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="p-[20px]">
-                    <p className="type-eyebrow mb-[12px]">My contribution</p>
-                    <ul className="space-y-[8px]">
-                      {[
-                        "Defined multi-role system architecture",
-                        "Led product structuring from 0→1",
-                        "Translated business evolution into product logic",
-                        "Designed cross-role interaction systems",
-                      ].map((item) => (
-                        <li key={item} className="flex items-start gap-[10px]">
-                          <span className="font-futura-light text-[11px] text-black/30 mt-[3px]">—</span>
-                          <p className="type-body">{item}</p>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <SubDivider />
-
-            {/* Reflection */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px]">
-              <div>
-                <p className="type-eyebrow mb-[16px]">Reflection</p>
-              </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2">
-                <InsightBlock label="→ Reflection">
-                  Design was a product-defining function — not a delivery service for pre-specified requirements. The most valuable decisions were structural, made before any interface was drawn.
-                </InsightBlock>
-              </div>
-            </div>
           </section>
 
           {/* Back link */}

@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import type { Project } from "../portfolio.config";
+import { registry } from "../case-studies/registry";
 
-const LIVE_SLUGS = new Set(["healthtech", "swiftfood", "volunteer"]);
-
-export default function ProjectCard({ project }) {
+export default function ProjectCard({ project }: { project: Project }) {
   const [imgError, setImgError]   = useState(false);
   const [showToast, setShowToast] = useState(false);
 
-  const isLive = LIVE_SLUGS.has(project.slug);
+  // Live = has a hand-crafted custom page OR is registered in the generic registry
+  const isLive = project.pageType === "custom" || (project.pageType === "generic" && project.slug in registry);
 
   const handleWipClick = () => {
     setShowToast(true);
@@ -39,7 +40,7 @@ export default function ProjectCard({ project }) {
           </div>
         ) : (
           <img
-            src={project.image}
+            src={project.coverImage}
             alt={project.title}
             onError={() => setImgError(true)}
             className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
@@ -70,18 +71,18 @@ export default function ProjectCard({ project }) {
         </div>
       </div>
 
-      {/* WIP toast — appears inside the card at the bottom */}
+      {/* WIP toast */}
       <div
         style={{
-          position:   "absolute",
-          bottom:     "20px",
-          left:       "50%",
-          transform:  showToast ? "translateX(-50%) translateY(0)" : "translateX(-50%) translateY(8px)",
-          opacity:    showToast ? 1 : 0,
-          transition: "opacity 0.25s ease, transform 0.25s ease",
+          position:      "absolute",
+          bottom:        "20px",
+          left:          "50%",
+          transform:     showToast ? "translateX(-50%) translateY(0)" : "translateX(-50%) translateY(8px)",
+          opacity:       showToast ? 1 : 0,
+          transition:    "opacity 0.25s ease, transform 0.25s ease",
           pointerEvents: "none",
-          whiteSpace: "nowrap",
-          zIndex:     10,
+          whiteSpace:    "nowrap",
+          zIndex:        10,
         }}
         className="bg-black text-white font-futura-medium text-[11px] tracking-[0.04em] px-4 py-2 rounded-full"
       >

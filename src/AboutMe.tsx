@@ -1,26 +1,8 @@
 import { useNavigate } from "react-router-dom";
+import { about, personal } from "./portfolio.config";
 
 export default function AboutMe() {
   const navigate = useNavigate();
-
-  const skills = [
-    {
-      category: "Design",
-      items: ["UX Research", "Wireframing", "Prototyping", "User Testing", "Information Architecture"],
-    },
-    {
-      category: "Tools",
-      items: ["Figma", "Adobe XD", "Illustrator", "Photoshop", "Miro"],
-    },
-    {
-      category: "Development",
-      items: ["HTML", "CSS", "React", "TypeScript"],
-    },
-    {
-      category: "Methods",
-      items: ["Design Thinking", "Agile", "Speculative Design", "Systems Thinking"],
-    },
-  ];
 
   return (
     <div className="min-h-screen w-screen bg-my-bg text-black flex flex-col font-serif">
@@ -39,8 +21,8 @@ export default function AboutMe() {
       <div className="w-full flex flex-col md:flex-row border-b border-black">
         <div className="w-full md:w-1/2 border-b md:border-b-0 md:border-r border-black">
           <img
-            src="/me.webp"
-            alt="Weilin"
+            src={about.photo}
+            alt={personal.name}
             className="w-full h-full object-cover max-h-[70vh] aspect-ratio-[4/3]"
           />
         </div>
@@ -49,26 +31,17 @@ export default function AboutMe() {
             About Me
           </h2>
           <div className="type-body max-w-[480px]">
-            <p>
-              Hi, I am Weilin, a designer with a background in Material Science and Engineering.
-              I design futures that are grounded in reality, approaching problems through both
-              speculative thinking and real-world constraints. I care deeply about the intersection
-              of technology, people, and systems.
-            </p>
+            <p>{about.bio}</p>
           </div>
         </div>
       </div>
 
       <div className="w-full border-b border-black pt-[40px] md:pt-[64px] pl-[24px] md:pl-[48px] pr-[24px] md:pr-[48px] pb-[40px] md:pb-[64px]">
-        <h3 className="type-eyebrow mb-[24px]">
-          Skills
-        </h3>
+        <h3 className="type-eyebrow mb-[24px]">Skills</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[40px]">
-          {skills.map((group) => (
+          {about.skills.map((group) => (
             <div key={group.category}>
-              <p className="type-subhead text-[18px] mb-[16px]">
-                {group.category}
-              </p>
+              <p className="type-subhead text-[18px] mb-[16px]">{group.category}</p>
               <div className="flex flex-wrap gap-[8px]">
                 {group.items.map((skill) => (
                   <span
@@ -85,14 +58,12 @@ export default function AboutMe() {
       </div>
 
       <div className="w-full pt-[40px] md:pt-[64px] pl-[24px] md:pl-[48px] pr-[24px] md:pr-[48px] pb-[40px] md:pb-[64px]">
-        <h3 className="font-sans text-sm tracking-widest uppercase opacity-40 mb-[40px]">
-          CV
-        </h3>
+        <h3 className="font-sans text-sm tracking-widest uppercase opacity-40 mb-[40px]">CV</h3>
         <div className="w-full border border-black mb-[32px] overflow-hidden">
           <iframe
             src="/Weilin_Sun_Product_Designer.pdf"
             className="w-full h-[60vh] md:h-[80vh]"
-            title="Weilin CV"
+            title={`${personal.name} CV`}
           />
         </div>
         <a

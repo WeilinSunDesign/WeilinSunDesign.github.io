@@ -1,27 +1,28 @@
 import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { personal, homeNav, carouselImages } from "./portfolio.config";
 
 // ─────────────────────────────────────────────
 // 年份动画 Hook（纯文字，无色带）
 // ─────────────────────────────────────────────
 function YearCounter() {
-  const labelRef = useRef(null);
+  const labelRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const label = labelRef.current;
     if (!label) return;
 
-    const startYear = 2021;
-    const endYear   = 2026;
+    const startYear = personal.yearStart;
+    const endYear   = personal.yearEnd;
     const duration  = 1400;
     const delay     = 300;
-    let startTime   = null;
-    let rafId       = null;
+    let startTime: number | null = null;
+    let rafId: number;
 
-    function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+    const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
 
-    function animate(now) {
+    const animate = (now: number) => {
       if (!startTime) startTime = now;
       const elapsed = Math.max(0, now - startTime - delay);
       const t       = Math.min(elapsed / duration, 1);
@@ -34,7 +35,7 @@ function YearCounter() {
       } else {
         label.textContent = `Portfolio ${startYear}–${endYear}`;
       }
-    }
+    };
 
     rafId = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(rafId);
@@ -46,29 +47,16 @@ function YearCounter() {
       className="font-futura-light text-sm tracking-widest"
       style={{ color: "black" }}
     >
-      Portfolio 2021–2021
+      Portfolio {personal.yearStart}–{personal.yearStart}
     </span>
   );
 }
 
 // ─────────────────────────────────────────────
-// 常量配置
+// 常量配置 (content sourced from portfolio.config.ts)
 // ─────────────────────────────────────────────
-const navSections = [
-  { id: "01", label: "UX/UI Projects",    target: "/projects#ux-ui-projects"   },
-  { id: "02", label: "Creative Computing",target: "/projects#creative-coding"  },
-  { id: "03", label: "Other Projects",    target: "/projects#other-projects"   },
-  { id: "04", label: "About me",          target: "/about"                     },
-];
-
-const images = [
-  { img: "./swiftfood.webp",     title: "Multi-Sided B2B2C Catering Platform",     slug: "swiftfood"     },
-  { img: "./healthtech.webp",    title: "AI Nutrition for GDM Care", slug: "healthtech"    },
-  { img: "./volunteer.webp",     title: "AR Future Volunteer System", slug: "volunteer"     },
-  { img: "./vrlibrary.webp",     title: "VR Library of Language Preservation",         slug: "vrlibrary"     },
-  { img: "./cardgame.webp",      title: "Gamified System for Cross-Cultural Communication",          slug: "cardgame"      },
-  { img: "./foldablerobot.webp", title: "Foldable Robot",     slug: "foldablerobot" },
-];
+const navSections = homeNav;
+const images      = carouselImages;
 
 const AUTO_DELAY         = 5000;
 const RESUME_DELAY       = 3000;
@@ -77,7 +65,13 @@ const ANIMATION_DURATION = 0.8;
 // ─────────────────────────────────────────────
 // SlidingTitle
 // ─────────────────────────────────────────────
-function SlidingTitle({ title, incomingTitle, isAnimating }) {
+interface SlidingTitleProps {
+  title: string;
+  incomingTitle: string;
+  isAnimating: boolean;
+}
+
+function SlidingTitle({ title, incomingTitle, isAnimating }: SlidingTitleProps) {
   return (
     <div className="relative self-stretch flex-1 overflow-hidden">
       {!isAnimating ? (
@@ -117,7 +111,16 @@ function SlidingTitle({ title, incomingTitle, isAnimating }) {
 // ─────────────────────────────────────────────
 // SlidingImage
 // ─────────────────────────────────────────────
-function SlidingImage({ currentImg, incomingImg, currentTitle, incomingTitle, direction, isAnimating }) {
+interface SlidingImageProps {
+  currentImg: string;
+  incomingImg: string;
+  currentTitle: string;
+  incomingTitle: string;
+  direction: number;
+  isAnimating: boolean;
+}
+
+function SlidingImage({ currentImg, incomingImg, currentTitle, incomingTitle, direction, isAnimating }: SlidingImageProps) {
   return (
     <div className="relative w-full overflow-hidden">
       {!isAnimating ? (
@@ -159,8 +162,8 @@ export default function App() {
   const [isPaused, setIsPaused]         = useState(false);
   const [showArrows, setShowArrows]     = useState(false);
 
-  const autoTimerRef   = useRef(null);
-  const resumeTimerRef = useRef(null);
+  const autoTimerRef   = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const clearAllTimers = () => {
     if (autoTimerRef.current)   clearTimeout(autoTimerRef.current);
@@ -174,7 +177,7 @@ export default function App() {
     resumeTimerRef.current = setTimeout(() => setIsPaused(false), RESUME_DELAY);
   };
 
-  const goToSlide = (dir) => {
+  const goToSlide = (dir: number) => {
     if (isAnimating) return;
     clearAllTimers();
     setDirection(dir);
@@ -211,8 +214,7 @@ export default function App() {
   const prevIndex     = (currentIndex - 1 + images.length) % images.length;
   const incomingIndex = direction === 1 ? nextIndex : prevIndex;
 
-  // ── nav click helper ──
-  const handleNav = (target) => navigate(target);
+  const handleNav = (target: string) => navigate(target);
 
   return (
     <div className="min-h-screen max-md:min-h-screen w-full overflow-x-hidden bg-my-bg text-black flex flex-col font-serif">
@@ -256,7 +258,7 @@ export default function App() {
         <div
           className="
             w-1/2 max-md:w-full
-            border-r-2 border-black max-md:border-r-0 
+            border-r-2 border-black max-md:border-r-0
             flex flex-col
             pt-[80px] xl:pt-[48px] max-md:pt-[4vw]
             pl-[48px] max-md:pl-[24px]
@@ -265,14 +267,14 @@ export default function App() {
             max-md:z-[1] max-md:relative
           "
         >
-          {/* 年份计数（纯文字动画） */}
+          {/* 年份计数 */}
           <div className="mb-[16px] max-md:mb-[3vw] max-md:fixed max-md:top-[10%]">
             <YearCounter />
           </div>
 
           {/* 大标题 */}
           <h1 className="font-futura-heavy text-[clamp(3rem,6vw,7rem)] tracking-tighter leading-[0.88] mb-[18px] max-md:mb-[3vw] max-md:fixed max-md:top-[14%]">
-            Weilin Sun
+            {personal.name}
           </h1>
 
           {/* Pill 标签 */}
@@ -287,7 +289,7 @@ export default function App() {
                 text-black
               "
             >
-              Product Designer
+              {personal.title}
             </span>
             <span
               className="
@@ -299,16 +301,15 @@ export default function App() {
                 text-grey-2
               "
             >
-              London/ Remote
+              {personal.location}
             </span>
           </div>
 
           {/* 简介文字 */}
           <div className="font-futura-light text-[clamp(12px,1.1vw,15px)] leading-[1.55] w-full opacity-80 mb-[56px] max-md:mb-[30vw] max-md:fixed max-md:top-[30%]">
-            <p className="mb-0">A product designer with a background in Material Science and Engneering. Specialised in bridging the gap between emerging tech and human-centric experiences. </p>
-            <p className="mb-0">
-              Experienced in AI-assisted product design workflows, with a proven track record of translating speculative research into tangible prototypes and products.
-            </p>            
+            {personal.bio.map((para, i) => (
+              <p key={i} className="mb-0">{para}</p>
+            ))}
           </div>
 
           {/* 导航菜单（桌面） */}
@@ -333,11 +334,7 @@ export default function App() {
 
           {/* 底部链接（桌面） */}
           <div className="max-md:hidden mt-auto pt-[64px] flex gap-[24px]">
-            {[
-              { label: "Linkedin", href: "https://www.linkedin.com/in/weilin-sun-429701291/" },
-              { label: "Email",    href: "mailto:sunweilin3399@gmail.com" },
-              { label: "Resume",   href: "https://weilin-uu.github.io/weilinportfolio.github.io/Weilin_Sun_Product_Designer.pdf" },
-            ].map(({ label, href }) => (
+            {personal.links.map(({ label, href }) => (
               <a
                 key={label}
                 href={href}
@@ -355,7 +352,7 @@ export default function App() {
 
         {/* ── 右栏：图片轮播 ────────────────── */}
         <div className="w-1/2 max-md:z-[0] max-md:w-[68%] max-md:fixed max-md:top-[66%] max-md:left-[16%] max-md:-translate-y-1/2 max-md:left-0 max-md:right-0 flex flex-col">
-          {/* 轮播主体 - relative 容器，移动端 nav 会 overlay 在此 */}
+          {/* 轮播主体 */}
           <div
             className="relative flex-1 min-h-[calc(100vh-64px)] max-md:min-h-0 overflow-hidden group"
             onMouseEnter={() => { setShowArrows(true);  pauseAutoplay(); }}
@@ -373,7 +370,6 @@ export default function App() {
             />
 
             <div className="absolute inset-0 bg-black/5 pointer-events-none" />
-
 
             <button
               onClick={goToPrev}
@@ -397,36 +393,32 @@ export default function App() {
           </div>
         </div>
 
-{/* 导航菜单（手机端） */}
-<nav className="hidden max-md:fixed max-md:top-[66%] max-md:block mb-[20vw] max-md:z-[1] px-[24px]">
-  <ul className="space-y-[2.5vw]">
-    {navSections.map((section) => (
-      <li
-        key={section.id}
-        className="flex items-center"
-      >
-        <span className="font-futura-heavy text-[12px] mr-4 opacity-30 text-black flex-shrink-0 bg-my-bg">
-          {section.id}
-        </span>
-        <span
-          className="font-futura-medium text-[clamp(1.3rem,5.0vw,2.2rem)] leading-none text-black transition-colors duration-200 hover:text-brand bg-my-bg cursor-pointer"
-          onClick={() => handleNav(section.target)}
-        >
-          {section.label}
-        </span>
-      </li>
-    ))}
-  </ul>
-</nav>
+        {/* 导航菜单（手机端） */}
+        <nav className="hidden max-md:fixed max-md:top-[66%] max-md:block mb-[20vw] max-md:z-[1] px-[24px]">
+          <ul className="space-y-[2.5vw]">
+            {navSections.map((section) => (
+              <li
+                key={section.id}
+                className="flex items-center"
+              >
+                <span className="font-futura-heavy text-[12px] mr-4 opacity-30 text-black flex-shrink-0 bg-my-bg">
+                  {section.id}
+                </span>
+                <span
+                  className="font-futura-medium text-[clamp(1.3rem,5.0vw,2.2rem)] leading-none text-black transition-colors duration-200 hover:text-brand bg-my-bg cursor-pointer"
+                  onClick={() => handleNav(section.target)}
+                >
+                  {section.label}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
         {/* ── 手机端：底部链接 ─────────── */}
         <div className="hidden max-md:block max-md:fixed max-md:top-[95%] w-full px-[24px] max-md:z-[1] pb-[8vw]">
           <div className="flex flex-row gap-[8px]">
-            {[
-              { label: "Linkedin", href: "https://www.linkedin.com/in/weilin-sun-429701291/" },
-              { label: "Email",    href: "mailto:sunweilin3399@gmail.com" },
-              { label: "Resume",   href: "https://weilin-uu.github.io/weilinportfolio.github.io/Weilin_Sun_Product_Designer.pdf" },
-            ].map(({ label, href }) => (
+            {personal.links.map(({ label, href }) => (
               <a
                 key={label}
                 href={href}

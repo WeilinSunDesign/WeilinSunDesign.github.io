@@ -2,90 +2,13 @@ import { useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import ProjectCards from "./components/ProjectCards";
+import { projects, projectSections } from "./portfolio.config";
 
-const projectSections = [
-  {
-    id: "ux-ui-projects",
-    title: "UX/UI Projects",
-    projects: [
-      {
-        slug: "swiftfood",
-        title: "Multi-sided Marketplace Platform for Food Delivery",
-        image: "/swiftfood.webp",
-        year: "2025",
-        chips: ["Marketplace UX", "B2C/B2B", "Multi-sided Platform"],
-      },
-      {
-        slug: "healthtech",
-        title: "Building an AI-driven nutrition platform for gestational diabetes management",
-        image: "/healthtech.webp",
-        year: "2024",
-        chips: ["HealthTech", "AI Product", "Startup Concept"],
-      },
-      {
-        slug: "volunteer",
-        title: "AR Future Volunteer System Design",
-        image: "/volunteer.webp",
-        year: "2024",
-        chips: ["AR", "Service Design", "Future Scenario"],
-      },
-      {
-        slug: "smarthome",
-        title: "Smart Home System Based on Affective Computing",
-        image: "/logo.webp",
-        year: "2021",
-        chips: ["Smart Home", "AI", "Affective Computing"],
-      },
-      {
-        slug: "vrlibrary",
-        title: "Future VR Library of Language Preservation",
-        image: "/vrlibrary.webp",
-        year: "2024",
-        chips: ["VR", "Cultural Preservation", "Speculative Design"],
-      },
-      {
-        slug: "cardgame",
-        title: "Gamified System for Cross-Cultural Communication",
-        image: "/cardgame.webp",
-        year: "2023",
-        chips: ["Game Design", "Education", "Cross-cultural"],
-      },
-    ],
-  },
-  {
-    id: "creative-coding",
-    title: "Creative Coding",
-    projects: [
-      {
-        slug: "creative-2",
-        title: "Generative Image Study",
-        image: "/gis-cover.webp",
-        year: "2026",
-        chips: ["Generative", "Visual System", "Experiment"],
-      },
-      {
-        slug: "foldable-robot",
-        title: "Foldable Robot",
-        image: "/foldablerobot.webp",
-        year: "2024",
-        chips: ["Physical Computing", "Robotics", "Prototype"],
-      },
-    ],
-  },
-  {
-    id: "other-projects",
-    title: "Other Projects",
-    projects: [
-      {
-        slug: "other-2",
-        title: "Mortise and tenon structure parent-child furniture",
-        image: "/logo.webp",
-        year: "2021",
-        chips: ["Furniture design", "Critical thinking", "Carpentry"],
-      },
-    ],
-  },
-];
+// Build the section+projects structure from config at module level
+const sections = projectSections.map((section) => ({
+  ...section,
+  projects: projects.filter((p) => p.section === section.id),
+}));
 
 export default function ProjectsPage() {
   const location = useLocation();
@@ -112,22 +35,17 @@ export default function ProjectsPage() {
     <div className="min-h-screen w-full overflow-x-hidden bg-my-bg text-black flex flex-col font-serif">
       <Header />
 
-      <div className="flex-1 mx-auto w-full max-w-[1920px] pb-[56px] md:pb-[72px] ">       
+      <div className="flex-1 mx-auto w-full max-w-[1920px] pb-[56px] md:pb-[72px]">
         <div className="space-y-0">
-          {projectSections.map((section) => (
+          {sections.map((section) => (
             <section
               key={section.id}
               id={section.id}
-              className="scroll-mt-10 "
+              className="scroll-mt-10"
             >
               <div className="border-b border-black px-[24px] pb-[24px] md:pb-[48px] pt-[24px] md:pt-[48px] py-[2px] md:px-[36px] md:py-[2px] xl:px-[48px]">
-                  <p className="type-eyebrow mb-[8px]">
-                     Selected Work
-                  </p>
-                
-                <h2 className="type-section-title">
-                  {section.title}
-                </h2>
+                <p className="type-eyebrow mb-[8px]">Selected Work</p>
+                <h2 className="type-section-title">{section.title}</h2>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">

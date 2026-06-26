@@ -1,9 +1,7 @@
-import { StrictMode, ReactNode } from "react";
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import { usePageView } from "./usePageView";
-import { AuthProvider, useAuth } from "./AuthContext";
-import PasswordGate from "./PasswordGate";
 
 import App from "./App";
 import ProjectsPage from "./ProjectsPage";
@@ -14,6 +12,8 @@ import HealthtechPage from "./healthtech";
 import SmarthomePage from "./Smarthome";
 import Other4Page from "./other-4";
 import GenerativeImagePage from "./generative-image";
+import VibeCodingPortfolio from "./vibe-coding-portfolio";
+import CaseStudyPage from "./CaseStudyPage";
 
 import "./index.css";
 
@@ -22,31 +22,27 @@ function PageViewTracker() {
   return null;
 }
 
-function Protected({ children }: { children: ReactNode }) {
-  const { isAuthenticated } = useAuth();
-  return isAuthenticated ? <>{children}</> : <PasswordGate />;
-}
-
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <HashRouter>
-      <AuthProvider>
-        <PageViewTracker />
-        <Routes>
-          {/* 公开页面 */}
-          <Route path="/" element={<App />} />
-          <Route path="/about" element={<AboutMe />} />
+      <PageViewTracker />
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/about" element={<AboutMe />} />
+        <Route path="/projects" element={<ProjectsPage />} />
 
-          {/* 需要密码的页面 */}
-          <Route path="/projects" element={<Protected><ProjectsPage /></Protected>} />
-          <Route path="/projects/volunteer" element={<Protected><VrVolunteerSystem /></Protected>} />
-          <Route path="/projects/swiftfood" element={<Protected><SwiftfoodPage /></Protected>} />
-          <Route path="/projects/healthtech" element={<Protected><HealthtechPage /></Protected>} />
-          <Route path="/projects/smarthome" element={<Protected><SmarthomePage /></Protected>} />
-          <Route path="/projects/other-4" element={<Protected><Other4Page /></Protected>} />
-          <Route path="/projects/creative-2" element={<Protected><GenerativeImagePage /></Protected>} />
-        </Routes>
-      </AuthProvider>
+        {/* ── Custom hand-crafted case study pages ── */}
+        <Route path="/projects/volunteer"             element={<VrVolunteerSystem />} />
+        <Route path="/projects/swiftfood"             element={<SwiftfoodPage />} />
+        <Route path="/projects/healthtech"            element={<HealthtechPage />} />
+        <Route path="/projects/smarthome"             element={<SmarthomePage />} />
+        <Route path="/projects/other-4"               element={<Other4Page />} />
+        <Route path="/projects/creative-2"            element={<GenerativeImagePage />} />
+        <Route path="/projects/vibe-coding-portfolio" element={<VibeCodingPortfolio />} />
+
+        {/* ── Generic template pages (reads from src/case-studies/registry.ts) ── */}
+        <Route path="/projects/:slug" element={<CaseStudyPage />} />
+      </Routes>
     </HashRouter>
   </StrictMode>
 );

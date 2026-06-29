@@ -18,10 +18,9 @@ export const personal = {
   title: "Product Designer",       // used as page/tab title
   location: "London/ Remote",
   badges: [
-    "Product Designer",
     "London/ Remote",
     "MDes Design Futures @RCA",
-    "Undergraduate UX Researcher @Tsinghua Future Lab",
+    "Tsinghua Future Lab",
   ],
   yearStart: 2021,
   yearEnd: 2026,

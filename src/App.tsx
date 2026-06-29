@@ -283,7 +283,7 @@ export default function App() {
               <span
                 key={i}
                 className={`
-                  font-futura-heavy text-[14px] md:text-[16px] tracking-widest
+                  font-futura-heavy text-[11px] md:text-[12px] tracking-widest
                   border-2 rounded-full
                   max-md:border-1 max-md:px-[10px]
                   px-[12px] py-[4px]

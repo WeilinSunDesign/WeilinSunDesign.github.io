@@ -279,30 +279,21 @@ export default function App() {
 
           {/* Pill 标签 */}
           <div className="flex flex-wrap gap-[10px] mb-[28px] max-md:mb-[2vw] max-md:fixed max-md:top-[23%]">
-            <span
-              className="
-                font-futura-heavy text-[14px] md:text-[16px] tracking-widest
-                border-2 border-black rounded-full
-                max-md:border-1 max-md:px-[10px]
-                px-[12px] py-[4px]
-                cursor-default
-                text-black
-              "
-            >
-              {personal.title}
-            </span>
-            <span
-              className="
-                font-futura-heavy text-[14px] md:text-[16px] tracking-widest
-                border-2 border-grey-2 rounded-full
-                max-md:border-1 max-md:px-[10px]
-                px-[12px] py-[4px]
-                cursor-default
-                text-grey-2
-              "
-            >
-              {personal.location}
-            </span>
+            {personal.badges.map((badge, i) => (
+              <span
+                key={i}
+                className={`
+                  font-futura-heavy text-[14px] md:text-[16px] tracking-widest
+                  border-2 rounded-full
+                  max-md:border-1 max-md:px-[10px]
+                  px-[12px] py-[4px]
+                  cursor-default
+                  ${i === 0 ? "border-black text-black" : "border-grey-2 text-grey-2"}
+                `}
+              >
+                {badge}
+              </span>
+            ))}
           </div>
 
           {/* 简介文字 */}

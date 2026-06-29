@@ -15,18 +15,23 @@
 
 export const personal = {
   name: "Weilin Sun",
-  title: "Product Designer",       // first pill badge
-  location: "London/ Remote",      // second pill badge
+  title: "Product Designer",       // used as page/tab title
+  location: "London/ Remote",
+  badges: [
+    "Product Designer",
+    "London/ Remote",
+    "MDes Design Futures @RCA",
+    "Undergraduate UX Researcher @Tsinghua Future Lab",
+  ],
   yearStart: 2021,
   yearEnd: 2026,
   bio: [
-    "A product designer with a background in Material Science and Engineering. Specialised in bridging the gap between emerging tech and human-centric experiences.",
-    "Experienced in AI-assisted product design workflows, with a proven track record of translating speculative research into tangible prototypes and products.",
+    "I'm a Product Designer with a background in UX research, AI-assisted product design and interdisciplinary collaboration. My work focuses on transforming complex technologies into intuitive digital experiences through user research, systems thinking and rapid prototyping. From AI-powered products to public services, I enjoy designing solutions that are both technically feasible and genuinely valuable to people.",
   ],
   links: [
     { label: "Linkedin", href: "https://www.linkedin.com/in/weilin-sun-429701291/" },
     { label: "Email",    href: "mailto:sunweilin3399@gmail.com" },
-    { label: "Resume",   href: "https://weilin-uu.github.io/weilinportfolio.github.io/Weilin_Sun_Product_Designer.pdf" },
+    { label: "Resume",   href: "/Weilin_Sun_Product_Designer.pdf" },
   ],
 };
 

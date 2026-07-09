@@ -7,10 +7,12 @@ import Header from "./components/Header";
 const navSections = [
   { id: "s-context",       label: "01 — Overview" },
   { id: "s-evolution",     label: "02 — Evolution" },
-  { id: "s-exploration",   label: "02b — Exploration" },
-  { id: "s-challenge",     label: "03 — Individual Ordering" },
-  { id: "s-design-system", label: "04 — Merchants" },
-  { id: "s-operations",    label: "05 — Corporate" },
+  { id: "s-roles",         label: "03 — Four Roles" },
+  { id: "s-challenge",     label: "04 — Individual Ordering" },
+  { id: "s-design-system", label: "05 — Merchants" },
+  { id: "s-operations",    label: "06 — Catering & Corporate" },
+  { id: "s-riders",        label: "07 — Rider's App" },
+  { id: "s-outcomes",      label: "08 — Outcomes" },
 ];
 
 // ── Data ──────────────────────────────────────────────────────────────────────
@@ -42,6 +44,33 @@ const introDetails: { label: string; value: string | React.ReactNode }[] = [
   { label: "Duration:", value: "1 Year" },
   { label: "Tools:",    value: "Figma, Google Ai Studio, Claude Code" },
   { label: "My Role:",  value: "Founding Product Designer" },
+];
+
+const orderFlowRoles = [
+  {
+    role: "Employee",
+    platform: "Mobile App",
+    reality: "A meal",
+    point: "Budget visible before browsing — not at checkout.",
+  },
+  {
+    role: "Manager",
+    platform: "Dashboard",
+    reality: "A budget entry",
+    point: "Headcount driven by clock-in sync — no daily approval.",
+  },
+  {
+    role: "Merchant",
+    platform: "Merchant App",
+    reality: "A production ticket",
+    point: "Mobile-only. Every competitor chose desktop.",
+  },
+  {
+    role: "Driver",
+    platform: "Driver App",
+    reality: "A pickup route",
+    point: "One stop per order — not one stop per vendor.",
+  },
 ];
 
 const phases = [
@@ -483,83 +512,66 @@ export default function SwiftFood() {
 
             <SubDivider />
 
-            {/* My Role — horizontal tree: root left → 5 role boxes right */}
-            <div className="mb-[40px] md:mb-[56px]">
-              <p className="type-eyebrow md:text-[14px] mb-[20px]">My Role</p>
-
-              <div className="hidden md:flex items-stretch">
-
-                {/* Root node */}
-                <div className="flex items-center flex-shrink-0 mr-[16px]">
-                  <p className="font-futura-medium text-brand leading-snug whitespace-nowrap" style={{ fontSize: "17px" }}>
-                    Founding Product Designer
-                  </p>
-                </div>
-
-                {/* Connector: mirrors role column (same gap-[8px] + flex-1) so rows align */}
-                <div className="flex flex-col gap-[8px] self-stretch flex-shrink-0" style={{ width: "48px" }}>
-                  {[0, 1, 2, 3, 4].map((i) => (
-                    <div key={i} className="relative flex-1">
-                      {/* Vertical bar segment — from center of first to center of last */}
-                      <div
-                        className="absolute bg-black/20"
-                        style={{ left: "50%", transform: "translateX(-50%)", width: "1px", top: i === 0 ? "50%" : "-4px", bottom: i === 4 ? "50%" : "-4px" }}
-                      />
-                      {/* Horizontal trunk from root (left edge) to vertical bar — center row only */}
-                      {i === 2 && (
-                        <div className="absolute bg-black/20" style={{ left: 0, right: "50%", height: "1px", top: "50%", transform: "translateY(-50%)" }} />
-                      )}
-                      {/* Horizontal prong from vertical bar to role box */}
-                      <div className="absolute bg-black/20" style={{ left: "50%", right: 0, height: "1px", top: "50%", transform: "translateY(-50%)" }} />
-                    </div>
-                  ))}
-                </div>
-
-                {/* 5 role boxes — separate, not in one big border */}
-                <div className="flex flex-col gap-[8px] flex-1">
-                  {[
-                    { title: "System Architect",            body: "Defined a multi-role system aligning five user mental models.",     icon: "/icons/icon-architecture.svg" },
-                    { title: "Product Strategist",          body: "Scaled the product from B2C to catering and corporate.",            icon: "/icons/icon-structure.svg" },
-                    { title: "UX Lead",                     body: "Led end-to-end UX across all platforms.",                          icon: "/icons/icon-interaction.svg" },
-                    { title: "Front-end Collaborator",      body: "Worked with engineers to ship and refine front-end.",               icon: "/icons/icon-platforms.svg" },
-                    { title: "Cross-functional Integrator", body: "Turned business and operational constraints into product decisions.", icon: "/icons/icon-bridge.svg" },
-                  ].map(({ title, body, icon }) => (
-                    <div key={title} className="border border-black/15 px-[16px] py-[12px] flex items-center gap-[12px]">
-                      <img src={icon} alt="" className="w-[56px] h-[56px] flex-shrink-0" style={{ filter: "brightness(0)", opacity: 0.6 }} />
-                      <div>
-                        <p className="type-body-key mb-[2px]">{title}</p>
-                        <p className="type-body">{body}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
+            {/* My Role — Five roles desktop */}
+            <div className="hidden md:flex items-stretch mt-[32px]">
+              <div className="flex items-center flex-shrink-0 mr-[16px]">
+                <p className="font-futura-medium text-brand leading-snug whitespace-nowrap" style={{ fontSize: "17px" }}>
+                  Founding Product Designer
+                </p>
               </div>
-
-              {/* Mobile fallback — simple list */}
-              <div className="md:hidden flex flex-col gap-[8px]">
+              <div className="flex flex-col gap-[8px] self-stretch flex-shrink-0" style={{ width: "48px" }}>
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <div key={i} className="relative flex-1">
+                    <div className="absolute bg-black/20" style={{ left: "50%", transform: "translateX(-50%)", width: "1px", top: i === 0 ? "50%" : "-4px", bottom: i === 4 ? "50%" : "-4px" }} />
+                    {i === 2 && (
+                      <div className="absolute bg-black/20" style={{ left: 0, right: "50%", height: "1px", top: "50%", transform: "translateY(-50%)" }} />
+                    )}
+                    <div className="absolute bg-black/20" style={{ left: "50%", right: 0, height: "1px", top: "50%", transform: "translateY(-50%)" }} />
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-col gap-[8px] flex-1">
                 {[
-                  { title: "System Architect",            body: "Defined a multi-role system aligning five user mental models.",     icon: "/icons/icon-architecture.svg" },
-                  { title: "Product Strategist",          body: "Scaled the product from B2C to catering and corporate.",            icon: "/icons/icon-structure.svg" },
-                  { title: "UX Lead",                     body: "Led end-to-end UX across all platforms.",                          icon: "/icons/icon-interaction.svg" },
-                  { title: "Front-end Collaborator",      body: "Worked with engineers to ship and refine front-end.",               icon: "/icons/icon-platforms.svg" },
+                  { title: "System Architect",            body: "Defined a multi-role system aligning four user mental models.",      icon: "/icons/icon-architecture.svg" },
+                  { title: "Product Strategist",          body: "Scaled the product from B2C to catering and corporate.",             icon: "/icons/icon-structure.svg" },
+                  { title: "UX Lead",                     body: "Led end-to-end UX across all platforms.",                           icon: "/icons/icon-interaction.svg" },
+                  { title: "Front-end Collaborator",      body: "Worked with engineers to ship and refine front-end.",                icon: "/icons/icon-platforms.svg" },
                   { title: "Cross-functional Integrator", body: "Turned business and operational constraints into product decisions.", icon: "/icons/icon-bridge.svg" },
                 ].map(({ title, body, icon }) => (
-                  <div key={title} className="border border-black/15 px-[16px] py-[12px] flex items-start gap-[12px]">
-                    <img src={icon} alt="" className="w-[28px] h-[28px] flex-shrink-0 mt-[2px]" style={{ filter: "brightness(0)", opacity: 0.6 }} />
+                  <div key={title} className="border border-black/15 px-[12px] py-[10px] flex items-center gap-[10px]">
+                    <img src={icon} alt="" className="w-[36px] h-[36px] flex-shrink-0" style={{ filter: "brightness(0)", opacity: 0.6 }} />
                     <div>
-                      <p className="type-body-key mb-[2px]">{title}</p>
-                      <p className="type-body">{body}</p>
+                      <p className="type-body-sm mb-[2px]">{title}</p>
+                      <p className="font-futura-medium text-[11px] leading-relaxed text-black/50">{body}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
+            {/* My Role — Five roles mobile */}
+            <div className="md:hidden flex flex-col gap-[8px] mt-[32px]">
+              {[
+                { title: "System Architect",            body: "Defined a multi-role system aligning four user mental models.",      icon: "/icons/icon-architecture.svg" },
+                { title: "Product Strategist",          body: "Scaled the product from B2C to catering and corporate.",             icon: "/icons/icon-structure.svg" },
+                { title: "UX Lead",                     body: "Led end-to-end UX across all platforms.",                           icon: "/icons/icon-interaction.svg" },
+                { title: "Front-end Collaborator",      body: "Worked with engineers to ship and refine front-end.",                icon: "/icons/icon-platforms.svg" },
+                { title: "Cross-functional Integrator", body: "Turned business and operational constraints into product decisions.", icon: "/icons/icon-bridge.svg" },
+              ].map(({ title, body, icon }) => (
+                <div key={title} className="border border-black/15 px-[12px] py-[10px] flex items-start gap-[10px]">
+                  <img src={icon} alt="" className="w-[28px] h-[28px] flex-shrink-0 mt-[1px]" style={{ filter: "brightness(0)", opacity: 0.6 }} />
+                  <div>
+                    <p className="type-body-sm mb-[2px]">{title}</p>
+                    <p className="font-futura-medium text-[11px] leading-relaxed text-black/50">{body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
           </section>
 
           {/* 02 — Product Evolution */}
-          <section id="s-evolution" className="pt-[56px] pb-[256px] border-b border-black/15">
+          <section id="s-evolution" className="pt-[56px] pb-[80px] md:pb-[120px] border-b border-black/15">
             <SectionLabel>02 — Product Evolution: From individual to catering to B2B2C</SectionLabel>
             <div className="flex flex-col">
 
@@ -648,161 +660,229 @@ export default function SwiftFood() {
             </div>
           </section>
 
-          {/* 02b — Early Exploration */}
-          <section id="s-exploration" className="pt-[56px] pb-[256px] border-b border-black/15">
-            <SectionLabel>02b — Early Exploration</SectionLabel>
+          {/* 03 — The Design Challenge: Four Roles */}
+          <section id="s-roles" className="pt-[56px] pb-[80px] md:pb-[120px] border-b border-black/15">
+            <SectionLabel>03 — The Design Challenge</SectionLabel>
 
-            {/* A market-inspired interface — text col 1 | blank col 2 | bullets cols 3-4 */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
+            {/* Thesis */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[56px] md:mb-[72px]">
               <div>
-                <p className="type-eyebrow mb-[16px]">A market-inspired interface</p>
-                <p className="type-body-key mb-[16px]">
-                  In the early stage, I explored a more expressive interaction model inspired by physical street markets.
-                </p>
-                <p className="type-body">
-                  The goal was to create an experience closer to how people explore food in real life.
-                </p>
+                <p className="type-eyebrow mb-[16px]">Why this project is different</p>
               </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2 flex flex-col gap-[24px]">
-                <ul className="space-y-[12px]">
-                  {[
-                    "A map-based entry point instead of a list",
-                    "Tinder-like swiping for menu navigation",
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-[12px]">
-                      <span className="w-[4px] h-[4px] rounded-full bg-black/25 mt-[8px] flex-shrink-0" />
-                      <p className="type-body">{item}</p>
-                    </li>
-                  ))}
-                </ul>
-                {/* Exploration sketches */}
-                <div className="flex gap-[12px]">
-                  <div className="flex-1"><ImagePlaceholder filename="sf-explore-map.webp" caption="Map-based entry" ratio="auto" /></div>
-                  <div className="flex-1"><ImagePlaceholder filename="sf-explore-poster.webp" caption="Swipe navigation" ratio="auto" /></div>
-                  <div className="flex-1"><ImagePlaceholder filename="sf-explore-swipe.webp" caption="Swipe navigation" ratio="auto" /></div>
-                </div>
+              <div className="md:col-span-3">
+                <p
+                  className="font-inria-serif leading-[1.2] tracking-tight text-black mb-[20px]"
+                  style={{ fontSize: "clamp(1.4rem, 2.4vw, 2.2rem)" }}
+                >
+                  I wasn't designing for one user. I was designing for four.
+                </p>
+                <p className="font-futura-medium text-[14px] md:text-[15px] leading-relaxed text-black/70 max-w-[600px]">
+                  Every order placed moves through four people — each with a different goal, a different device, a different definition of success. Optimising for one often works against another. The challenge was not to build four interfaces. It was to build one system that holds all four realities without fragmenting.
+                </p>
               </div>
             </div>
 
             <SubDivider />
 
-            {/* Why this direction was abandoned — text col 1 | blank col 2 | bullets cols 3-4 */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[40px]">
-              <div>
-                <p className="type-eyebrow mb-[16px]">Why this direction was abandoned</p>
-                <p className="type-body">Three key risks identified:</p>
-              </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2">
-                <ul className="space-y-[12px]">
-                  {[
-                    "Higher learning cost for first-time users",
-                    "Slower interaction in a time-sensitive context (lunch ordering)",
-                    "Increased complexity when scaling across multiple roles",
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-[12px]">
-                      <span className="w-[4px] h-[4px] rounded-full bg-black/25 mt-[8px] flex-shrink-0" />
-                      <p className="type-body">{item}</p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+            {/* One order — four realities */}
+            <div className="mt-[32px]">
+              <p className="type-eyebrow mb-[28px]">One order — four realities</p>
 
-            <SubDivider />
-
-            {/* The trade-off — text col 1 | blank col 2 | content cols 3-4 */}
-            <div className="border border-black/20 p-[24px] md:p-[28px] mt-[24px] grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[20px]">
-              <div>
-                <p className="type-eyebrow mb-[16px]">The trade-off</p>
-                <div className="border-l-2 border-brand pl-[12px] py-[2px]">
-                  <p className="type-body-sm text-brand">Novelty vs usability</p>
-                </div>
-              </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2">
-                <p className="type-body mb-[16px]">
-                  An expressive interface might have matched the street-market brand, but it would have introduced friction at every point in the ordering flow.
-                </p>
-                <p className="type-body mb-[16px]">
-                  I adopted a more familiar structure: list-based browsing, standard navigation, and faster, more predictable interactions.
-                </p>
-                <p className="type-eyebrow mb-[12px]">I prioritised</p>
-                <div className="flex flex-wrap gap-[8px] mb-[16px]">
-                  {["Speed", "Learnability", "Scalability"].map((tag) => (
-                    <span key={tag} className="inline-flex rounded-full border border-black px-3 py-1 type-chip text-black bg-my-bg">
-                      {tag}
-                    </span>
+              {/* Desktop: hub-and-spoke diagram */}
+              <div className="hidden md:flex flex-col items-center">
+                <TreeNode label="Order Placed" />
+                <TreeConnector count={4} />
+                <div className="flex items-start gap-[8px] w-full">
+                  {orderFlowRoles.map(({ role, platform, reality, point }) => (
+                    <div key={role} className="flex flex-col flex-1 min-w-0">
+                      <TreeNode label={role} sub={platform} />
+                      <TreePipe />
+                      <div className="border border-dashed border-black/20 p-[10px] flex flex-col gap-[8px]">
+                        <p
+                          className="font-inria-serif text-brand text-center"
+                          style={{ fontSize: "13px", lineHeight: 1.3 }}
+                        >
+                          "{reality}"
+                        </p>
+                        <div className="border-t border-black/10 pt-[8px]">
+                          <p className="type-eyebrow mb-[4px]">Design point</p>
+                          <p className="font-futura-medium text-[11px] leading-relaxed text-black/60">{point}</p>
+                        </div>
+                      </div>
+                    </div>
                   ))}
                 </div>
-                <p className="type-body-sm text-black/40 italic">This was not a visual decision — it was a product decision prioritising speed and learnability over novelty.</p>
+              </div>
+
+              {/* Mobile: stacked list */}
+              <div className="md:hidden flex flex-col gap-[12px]">
+                {orderFlowRoles.map(({ role, platform, reality, point }) => (
+                  <div key={role} className="border border-dashed border-black/20 p-[16px] flex flex-col gap-[8px]">
+                    <div className="flex items-baseline gap-[12px]">
+                      <p className="type-eyebrow">{role}</p>
+                      <p className="font-futura-medium text-[10px] text-black/30 uppercase tracking-[0.08em]">{platform}</p>
+                    </div>
+                    <p className="font-inria-serif text-brand" style={{ fontSize: "14px", lineHeight: 1.3 }}>"{reality}"</p>
+                    <div className="border-t border-black/10 pt-[8px]">
+                      <p className="type-eyebrow mb-[4px]">Design point</p>
+                      <p className="font-futura-medium text-[12px] leading-relaxed text-black/60">{point}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
           </section>
 
-          {/* 03 — Individual Ordering */}
-          <section id="s-challenge" className="pt-[56px] pb-[256px] border-b border-black/15">
-            <SectionLabel>03 — Individual ordering</SectionLabel>
+          {/* 04 — Individual Ordering */}
+          <section id="s-challenge" className="pt-[56px] pb-[80px] md:pb-[120px] border-b border-black/15">
+            <SectionLabel>04 — Individual Ordering</SectionLabel>
 
-            {/* Intro — text col 1 | blank col 2 | body cols 3-4 */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
-              <div>
-                <p className="type-eyebrow mb-[16px]">The baseline</p>
-                <p className="type-body">The product started with a simple consumer flow focused on individual ordering.</p>
+            {/* 04a — Path Not Taken */}
+            <div id="s-exploration">
+              <p className="font-inria-serif mb-[32px] md:mb-[48px]" style={{ fontSize: "clamp(1.1rem, 2vw, 1.8rem)", lineHeight: 1 }}>04a — Path Not Taken</p>
+
+              {/* Why I abandoned the map-based interface */}
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
+                <div>
+                  <p className="type-eyebrow mb-[16px]">Why I Abandoned the Map-Based Interface</p>
+                  <p className="type-body-key mb-[16px]">
+                    Early on, I explored a more expressive interaction model inspired by physical street markets — and ultimately abandoned it.
+                  </p>
+                  <div className="border border-black/20 p-[16px] mt-[8px]">
+                    <p className="font-futura-heavy text-[13px] md:text-[14px] leading-snug mb-[12px]">Ruled out by user friction and business constraints</p>
+                    <div className="border-l-2 border-brand pl-[12px] py-[2px] mb-[12px]">
+                      <p className="type-body-sm text-brand">Two key risks identified:</p>
+                    </div>
+                    <ul className="space-y-[10px]">
+                      {[
+                        "Higher learning cost for first-time users",
+                        "Slower interaction in a time-sensitive context (lunch ordering)",
+                      ].map((item) => (
+                        <li key={item} className="flex items-start gap-[10px]">
+                          <span className="w-[4px] h-[4px] rounded-full bg-black/25 mt-[7px] flex-shrink-0" />
+                          <p className="type-body-sm">{item}</p>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                <div className="hidden md:block" />
+                <div className="md:col-span-2 flex flex-col gap-[24px]">
+                  <ul className="space-y-[12px]">
+                    {[
+                      "A map-based entry point instead of a list",
+                      "Tinder-like swiping for menu navigation",
+                    ].map((item) => (
+                      <li key={item} className="flex items-start gap-[12px]">
+                        <span className="w-[4px] h-[4px] rounded-full bg-black/25 mt-[8px] flex-shrink-0" />
+                        <p className="type-body">{item}</p>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="flex gap-[12px]">
+                    <div className="flex-1"><ImagePlaceholder filename="sf-explore-map.webp" caption="Map-based entry" ratio="auto" /></div>
+                    <div className="flex-1"><ImagePlaceholder filename="sf-explore-poster.webp" caption="Swipe navigation" ratio="auto" /></div>
+                    <div className="flex-1"><ImagePlaceholder filename="sf-explore-swipe.webp" caption="Swipe navigation" ratio="auto" /></div>
+                  </div>
+                </div>
               </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2">
-                <p className="type-body-key mb-[16px]">
-                  Users browse food by market, select items from multiple vendors, and place a single combined order.
-                </p>
-                <p className="type-body">
-                  A key concept introduced early on: <span className="font-futura-medium">one delivery fee per market.</span>
-                </p>
+
+              <SubDivider />
+
+              {/* The trade-off */}
+              <div className="border border-black/20 p-[24px] md:p-[28px] mt-[24px] grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[20px]">
+                <div>
+                  <p className="type-eyebrow mb-[16px]">The trade-off</p>
+                  <div className="border-l-2 border-brand pl-[12px] py-[2px]">
+                    <p className="type-body-sm text-brand">Novelty vs usability</p>
+                  </div>
+                </div>
+                <div className="hidden md:block" />
+                <div className="md:col-span-2">
+                  <p className="type-body mb-[16px]">
+                    An expressive interface might have matched the street-market brand, but it would have introduced friction at every point in the ordering flow.
+                  </p>
+                  <p className="type-body mb-[16px]">
+                    I adopted a more familiar structure: list-based browsing, standard navigation, and faster, more predictable interactions.
+                  </p>
+                  <p className="type-eyebrow mb-[12px]">I prioritised</p>
+                  <div className="flex flex-wrap gap-[8px] mb-[16px]">
+                    {["Speed", "Learnability", "Scalability"].map((tag) => (
+                      <span key={tag} className="inline-flex rounded-full border border-black px-3 py-1 type-chip text-black bg-my-bg">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="type-body-sm text-black/40 italic">This was not a visual decision — it was a product decision prioritising speed and learnability over novelty.</p>
+                </div>
               </div>
             </div>
 
             <SubDivider />
 
-            {/* Design focus — text col 1 | blank col 2 | images cols 3-4 */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
-              <div>
-                <p className="type-eyebrow mb-[16px]">Design focus</p>
-                <p className="type-body mb-[16px]">This concept was reinforced across the key journey:</p>
-                <ul className="space-y-[8px]">
-                  {["Homepage", "Market view", "Cart"].map((item) => (
-                    <li key={item} className="flex items-start gap-[10px]">
-                      <span className="w-[4px] h-[4px] rounded-full bg-black/25 mt-[7px] flex-shrink-0" />
-                      <p className="type-body-sm">{item}</p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2 flex gap-[12px]">
-                <div className="flex-1"><ImagePlaceholder filename="sf-b2c-home.webp" caption="Homepage — entry point for market-based browsing" ratio="auto" /></div>
-                <div className="flex-1"><ImagePlaceholder filename="sf-b2c-market.webp" caption="Market — multi-vendor selection within one context" ratio="auto" /></div>
-                <div className="flex-1"><ImagePlaceholder filename="sf-b2c-cart.webp" caption="Cart — unified checkout with one delivery fee" ratio="auto" /></div>
-              </div>
-            </div>
+            {/* 04b — Individual Ordering */}
+            <div>
+              <p className="font-inria-serif mb-[32px] md:mb-[48px]" style={{ fontSize: "clamp(1.1rem, 2vw, 1.8rem)", lineHeight: 1 }}>04b — Individual Ordering</p>
 
-            <SubDivider />
+              {/* Intro — text col 1 | blank col 2 | body cols 3-4 */}
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
+                <div>
+                  <p className="type-eyebrow mb-[16px]">The baseline</p>
+                  <p className="type-body">The product started with a simple consumer flow focused on individual ordering.</p>
+                </div>
+                <div className="hidden md:block" />
+                <div className="md:col-span-2">
+                  <p className="type-body-key mb-[16px]">
+                    Users browse food by market, select items from multiple vendors, and place a single combined order.
+                  </p>
+                  <p className="type-body">
+                    A key concept introduced early on: <span className="font-futura-medium">one delivery fee per market.</span>
+                  </p>
+                </div>
+              </div>
 
-            {/* Closing note */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px]">
-              <div className="hidden md:block" />
-              <div className="hidden md:block" />
-              <div className="md:col-span-2">
-                <p className="type-body-sm text-black/40 italic">This established a clear and simple baseline for the product experience.</p>
+              <SubDivider />
+
+              {/* Design focus — text col 1 | blank col 2 | images cols 3-4 */}
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
+                <div>
+                  <p className="type-eyebrow mb-[16px]">Design focus</p>
+                  <p className="type-body mb-[16px]">This concept was reinforced across the key journey:</p>
+                  <ul className="space-y-[8px]">
+                    {["Homepage", "Market view", "Cart"].map((item) => (
+                      <li key={item} className="flex items-start gap-[10px]">
+                        <span className="w-[4px] h-[4px] rounded-full bg-black/25 mt-[7px] flex-shrink-0" />
+                        <p className="type-body-sm">{item}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="hidden md:block" />
+                <div className="md:col-span-2 flex gap-[12px]">
+                  <div className="flex-1"><ImagePlaceholder filename="sf-b2c-home.webp" caption="Homepage — entry point for market-based browsing" ratio="auto" /></div>
+                  <div className="flex-1"><ImagePlaceholder filename="sf-b2c-market.webp" caption="Market — multi-vendor selection within one context" ratio="auto" /></div>
+                  <div className="flex-1"><ImagePlaceholder filename="sf-b2c-cart.webp" caption="Cart — unified checkout with one delivery fee" ratio="auto" /></div>
+                </div>
+              </div>
+
+              <SubDivider />
+
+              {/* Closing note */}
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px]">
+                <div className="hidden md:block" />
+                <div className="hidden md:block" />
+                <div className="md:col-span-2">
+                  <p className="type-body-sm text-black/40 italic">This established a clear and simple baseline for the product experience.</p>
+                </div>
               </div>
             </div>
 
           </section>
 
-          {/* 04 — Designing for Merchants */}
+          {/* 05 — Designing for Merchants */}
           <section id="s-design-system" className="pt-[56px] pb-[256px] border-b border-black/15">
-            <SectionLabel>04 — Designing for merchants</SectionLabel>
+            <SectionLabel>05 — Designing for merchants</SectionLabel>
 
             {/* Intro — text col 1 | blank col 2 | body cols 3-4 */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
@@ -865,53 +945,203 @@ export default function SwiftFood() {
 
             <SubDivider />
 
-            {/* Merchant UI — 4 images, same individual width as B2C, centered */}
-            <div className="flex justify-center">
-              <div className="w-2/3 flex gap-[12px]">
-                <div className="flex-1"><ImagePlaceholder filename="merchant-stall.webp" caption="Merchant stall" ratio="auto" /></div>
-                <div className="flex-1"><ImagePlaceholder filename="merchant-data.webp" caption="Order data" ratio="auto" /></div>
-                <div className="flex-1"><ImagePlaceholder filename="merchant-revenue.webp" caption="Revenue" ratio="auto" /></div>
-                <div className="flex-1"><ImagePlaceholder filename="sf-merchant-ui.webp" caption="Merchant app" ratio="auto" /></div>
-              </div>
-            </div>
-
-          </section>
-
-          {/* 05 — Corporate */}
-          <section id="s-operations" className="pt-[56px] pb-[256px] border-b border-black/15">
-            <SectionLabel>05 — Corporate — where complexity emerges</SectionLabel>
-
-            {/* Intro — text col 1 | blank col 2 | body cols 3-4 */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
-              <div>
-                <p className="type-eyebrow mb-[16px]">Where complexity emerges</p>
-                <p className="type-body">While the product spans multiple services, the real complexity emerges in the corporate system.</p>
-              </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2">
-                <p className="type-body-key mb-[16px]">
-                  Here, the system shifts from a single-user experience to a multi-role platform.
-                </p>
-                <p className="type-subhead mb-[16px]">A single order is interpreted differently by each role.</p>
-                <p className="type-body">
-                  This introduces a fundamentally different design problem: not interface design, but system design.
-                </p>
+            {/* Employee Mode */}
+            <div className="mb-[40px]">
+              <p className="font-futura-medium text-[11px] text-black/35 uppercase tracking-[0.1em] mb-[20px]">Employee Mode — Order Receiving</p>
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px]">
+                <div className="hidden md:block" />
+                <div className="hidden md:block" />
+                <div className="md:col-span-2 flex gap-[12px]">
+                  <div className="flex-1"><ImagePlaceholder filename="merchant-orders-1.webp" caption="Incoming order" ratio="auto" /></div>
+                  <div className="flex-1"><ImagePlaceholder filename="merchant-orders-2.webp" caption="Order fulfilment" ratio="auto" /></div>
+                </div>
               </div>
             </div>
 
             <SubDivider />
 
-
-            {/* Corporate desktop UI — 2 images side by side */}
-            <div className="flex gap-[12px]">
-              <div className="flex-1">
-                <ImagePlaceholder filename="sf-decision-01.webp" caption="Employee view" ratio="auto" />
-              </div>
-              <div className="flex-1">
-                <ImagePlaceholder filename="sf-decision-02.webp" caption="Manager view" ratio="auto" />
+            {/* Manager Mode */}
+            <div>
+              <p className="font-futura-medium text-[11px] text-black/35 uppercase tracking-[0.1em] mb-[20px]">Manager Mode — Store Management</p>
+              <div className="flex gap-[12px]">
+                <div className="flex-1"><ImagePlaceholder filename="merchant-stall.webp" caption="Stall overview" ratio="auto" /></div>
+                <div className="flex-1"><ImagePlaceholder filename="merchant-data.webp" caption="Order data" ratio="auto" /></div>
+                <div className="flex-1"><ImagePlaceholder filename="merchant-revenue.webp" caption="Revenue" ratio="auto" /></div>
+                <div className="flex-1"><ImagePlaceholder filename="sf-merchant-ui.webp" caption="Menu management" ratio="auto" /></div>
               </div>
             </div>
 
+          </section>
+
+          {/* 06 — Catering & Corporate */}
+          <section id="s-operations" className="pt-[56px] pb-[80px] md:pb-[120px] border-b border-black/15">
+            <SectionLabel>06 — Catering & Corporate</SectionLabel>
+
+            {/* 06a — Catering */}
+            <div className="mb-[56px]">
+              <p className="font-inria-serif mb-[32px] md:mb-[48px]" style={{ fontSize: "clamp(1.1rem, 2vw, 1.8rem)", lineHeight: 1 }}>06a — Catering</p>
+
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
+                <div>
+                  <p className="type-eyebrow mb-[16px]">Group ordering</p>
+                  <p className="type-body">Catering shifted the product toward planned, large-group consumption — from on-demand to structured events.</p>
+                </div>
+                <div className="hidden md:block" />
+                <div className="md:col-span-2">
+                  <p className="type-body-key mb-[16px]">Designed for student societies and corporate events.</p>
+                  <p className="type-body">Users plan ahead, select from multiple vendors, and coordinate delivery for large groups in a single order.</p>
+                </div>
+              </div>
+
+              <SubDivider />
+
+              <div className="flex flex-col gap-[12px] mt-[32px]">
+                <div className="flex gap-[12px]">
+                  <div className="flex-1"><ImagePlaceholder filename="catering-home.webp" caption="Homepage" ratio="auto" /></div>
+                  <div className="flex-1"><ImagePlaceholder filename="catering-order-1.webp" caption="Order process — step 1" ratio="auto" /></div>
+                </div>
+                <div className="flex gap-[12px]">
+                  <div className="flex-1"><ImagePlaceholder filename="catering-order-2.webp" caption="Order process — step 2" ratio="auto" /></div>
+                  <div className="flex-1"><ImagePlaceholder filename="catering-order-3.webp" caption="Order process — step 3" ratio="auto" /></div>
+                </div>
+              </div>
+            </div>
+
+            <SubDivider />
+
+            {/* 06b — Corporate */}
+            <div className="pt-[40px]">
+              <p className="font-inria-serif mb-[32px] md:mb-[48px]" style={{ fontSize: "clamp(1.1rem, 2vw, 1.8rem)", lineHeight: 1 }}>06b — Corporate</p>
+
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
+                <div>
+                  <p className="type-eyebrow mb-[16px]">Where complexity emerges</p>
+                  <p className="type-body">While the product spans multiple services, the real complexity emerges in the corporate system.</p>
+                </div>
+                <div className="hidden md:block" />
+                <div className="md:col-span-2">
+                  <p className="type-body-key mb-[16px]">
+                    Here, the system shifts from a single-user experience to a multi-role platform.
+                  </p>
+                  <p className="type-subhead mb-[16px]">A single order is interpreted differently by each role.</p>
+                  <p className="type-body">
+                    This introduces a fundamentally different design problem: not interface design, but system design.
+                  </p>
+                </div>
+              </div>
+
+              <SubDivider />
+
+              <div className="flex gap-[12px]">
+                <div className="flex-1">
+                  <ImagePlaceholder filename="sf-decision-01.webp" caption="Employee view" ratio="auto" />
+                </div>
+                <div className="flex-1">
+                  <ImagePlaceholder filename="sf-decision-02.webp" caption="Manager view" ratio="auto" />
+                </div>
+              </div>
+            </div>
+
+          </section>
+
+          {/* 07 — Rider's App */}
+          <section id="s-riders" className="pt-[56px] pb-[80px] md:pb-[120px] border-b border-black/15">
+            <SectionLabel>07 — Rider's App</SectionLabel>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
+              <div>
+                <p className="type-eyebrow mb-[16px]">Last-mile delivery</p>
+                <p className="type-body">The rider app is the operational backbone of the platform — translating orders into routes.</p>
+              </div>
+              <div className="hidden md:block" />
+              <div className="md:col-span-2">
+                <p className="type-body-key mb-[16px]">Designed for speed and clarity under pressure.</p>
+                <p className="type-body">Riders receive consolidated pickup instructions — one stop per order regardless of vendor count.</p>
+              </div>
+            </div>
+
+            <SubDivider />
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px]">
+              <div className="hidden md:block" />
+              <div className="hidden md:block" />
+              <div className="md:col-span-2 flex gap-[12px]">
+                <div className="flex-1"><ImagePlaceholder filename="riders-app-1.webp" caption="Route view" ratio="auto" /></div>
+                <div className="flex-1"><ImagePlaceholder filename="riders-app-2.webp" caption="Order detail" ratio="auto" /></div>
+                <div className="flex-1"><ImagePlaceholder filename="riders-app-3.webp" caption="Delivery confirmation" ratio="auto" /></div>
+              </div>
+            </div>
+
+          </section>
+
+          {/* 08 — Outcomes */}
+          <section id="s-outcomes" className="pt-[56px] pb-[80px] md:pb-[120px] border-b border-black/15">
+            <SectionLabel>08 — Outcomes</SectionLabel>
+
+            {/* Business metrics */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-[16px] mb-[48px] md:mb-[64px]">
+              {[
+                { value: "1,000+", label: "Orders processed",  note: "across individual, catering, and corporate" },
+                { value: "2×",     label: "Revenue growth",    note: "after shift to corporate and catering focus" },
+                { value: "£7,000", label: "GMV achieved",      note: "in the first operational year" },
+              ].map(({ value, label, note }) => (
+                <div key={label} className="border border-black/15 px-[24px] py-[28px]">
+                  <p className="font-inria-serif leading-none tracking-tight text-black mb-[10px]" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}>{value}</p>
+                  <p className="type-body-key mb-[4px]">{label}</p>
+                  <p className="type-body-sm text-black/40">{note}</p>
+                </div>
+              ))}
+            </div>
+
+            <SubDivider />
+
+            {/* Design-specific outcomes */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mt-[32px]">
+              <div>
+                <p className="type-eyebrow mb-[16px]">Design outcomes</p>
+                <p className="type-body">Beyond the business metrics, the design system delivered measurable structural results.</p>
+              </div>
+              <div className="hidden md:block" />
+              <div className="md:col-span-2 flex flex-col gap-[20px]">
+                {[
+                  {
+                    heading: "One design system, three product lines",
+                    body: "The design system — tokens, component patterns, and interaction models — scales across individual, catering, and corporate without a rebuild. Built once; adapted, not duplicated.",
+                  },
+                  {
+                    heading: "Merchant onboarding eliminated training overhead",
+                    body: "The ordering window model removed the need for live menu-synchronisation training. Merchants configure once; the system handles the rest.",
+                  },
+                ].map(({ heading, body }) => (
+                  <div key={heading} className="border-l-2 border-brand pl-[16px] py-[4px]">
+                    <p className="type-body-key mb-[6px]">{heading}</p>
+                    <p className="type-body">{body}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Reflection */}
+          <section className="pt-[56px] pb-[80px] md:pb-[120px]">
+            <p className="type-eyebrow mb-[32px] md:mb-[48px]" style={{ letterSpacing: "0.1em" }}>
+              Reflection
+            </p>
+
+            <div className="max-w-[680px]">
+              <p
+                className="font-inria-serif leading-[1.3] tracking-tight text-black mb-[24px] md:mb-[32px]"
+                style={{ fontSize: "clamp(1.2rem, 2vw, 1.8rem)" }}
+              >
+                Design was a product-defining function, not a finishing layer.
+              </p>
+              <p className="font-futura-medium text-[14px] md:text-[15px] leading-relaxed text-black/70 mb-[20px]">
+                Every structural decision in this project — the ordering window model, the multi-role system, the choice to abandon map-based navigation — was a design decision first. The visual layer followed from the structure, not the other way around.
+              </p>
+              <p className="font-futura-medium text-[14px] md:text-[15px] leading-relaxed text-black/70">
+                What this project taught me: I'm drawn to systemic, structural problems more than visual ones. The most interesting design work here happened at the level of information architecture and role-based flows, not UI polish. I want my next role to take that further — designing for complex workflows, technical users, and systems that require that kind of structural rigour.
+              </p>
+            </div>
           </section>
 
           {/* Back link */}

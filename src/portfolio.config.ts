@@ -109,10 +109,10 @@ export const projects: Project[] = [
   },
   {
     slug: "smarthome",
-    title: "Smart Home System Based on Affective Computing",
-    coverImage: "/logo.webp",
+    title: "Affective Computing for Smart Home — Sensing and Representing Emotional Needs at Home",
+    coverImage: "/sl-cover.webp",
     year: "2021",
-    chips: ["Smart Home", "AI", "Affective Computing"],
+    chips: ["Affective Computing", "Smart Home Research", "Published Research"],
     section: "ux-ui-projects",
     pageType: "custom",
   },
@@ -127,12 +127,12 @@ export const projects: Project[] = [
   },
   {
     slug: "cardgame",
-    title: "Gamified System for Cross-Cultural Communication",
+    title: "Culture Meme Master — Gamified System for Cross-Cultural Communication",
     coverImage: "/cardgame.webp",
     year: "2023",
-    chips: ["Game Design", "Education", "Cross-cultural"],
+    chips: ["Game Design", "Service Design", "Cross-cultural"],
     section: "ux-ui-projects",
-    pageType: null,
+    pageType: "custom",
   },
   // ── Creative Coding ───────────────────────────────────────────────────────
   {
@@ -182,6 +182,6 @@ export const carouselImages = [
   { img: "./healthtech.webp",    title: "AI Nutrition for GDM Care",                        slug: "healthtech"    },
   { img: "./volunteer.webp",     title: "AR Future Volunteer System",                       slug: "volunteer"     },
   { img: "./vrlibrary.webp",     title: "VR Library of Language Preservation",              slug: "vrlibrary"     },
-  { img: "./cardgame.webp",      title: "Gamified System for Cross-Cultural Communication", slug: "cardgame"      },
+  { img: "./cardgame.webp",      title: "Culture Meme Master",                              slug: "cardgame"      },
   { img: "./foldablerobot.webp", title: "Foldable Robot",                                   slug: "foldablerobot" },
 ];

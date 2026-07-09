@@ -13,6 +13,7 @@ import SmarthomePage from "./Smarthome";
 import Other4Page from "./other-4";
 import GenerativeImagePage from "./generative-image";
 import VibeCodingPortfolio from "./vibe-coding-portfolio";
+import CardgamePage from "./cardgame";
 import CaseStudyPage from "./CaseStudyPage";
 
 import "./index.css";
@@ -39,6 +40,7 @@ createRoot(document.getElementById("root")!).render(
         <Route path="/projects/other-4"               element={<Other4Page />} />
         <Route path="/projects/creative-2"            element={<GenerativeImagePage />} />
         <Route path="/projects/vibe-coding-portfolio" element={<VibeCodingPortfolio />} />
+        <Route path="/projects/cardgame"              element={<CardgamePage />} />
 
         {/* ── Generic template pages (reads from src/case-studies/registry.ts) ── */}
         <Route path="/projects/:slug" element={<CaseStudyPage />} />

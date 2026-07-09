@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 
 const SESSION_KEY = "portfolio_unlocked";
-const PASSWORD = "weilin2025"; // 改成你自己的密码
+const PASSWORD = "10141998"; // 改成你自己的密码
 
 interface AuthContextType {
   isAuthenticated: boolean;

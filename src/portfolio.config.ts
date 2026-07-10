@@ -90,9 +90,9 @@ export const projects: Project[] = [
     pageType: "custom",
   },
   {
-    slug: "smarthome",
+    slug: "affectivecomputing",
     title: "Affective computing in human habitats— Emotional Needs at shared House",
-    coverImage: "/sl-cover.webp",
+    coverImage: "/slintro.webp",
     year: "2021",
     chips: ["Affective Computing", "Smart Home Research", "Published Research"],
     section: "ux-ui-projects",
@@ -110,7 +110,7 @@ export const projects: Project[] = [
   {
     slug: "cardgame",
     title: "Culture Meme Master — Gamified System for Cross-Cultural Communication",
-    coverImage: "/cardgame.webp",
+    coverImage: "/cmm-intro.webp",
     year: "2023",
     chips: ["Game Design", "Service Design", "Cross-cultural"],
     section: "ux-ui-projects",
@@ -135,15 +135,6 @@ export const projects: Project[] = [
     pageType: "custom",
   },
   // ── Creative Coding ───────────────────────────────────────────────────────
-  {
-    slug: "creative-2",
-    title: "Generative Image Study",
-    coverImage: "/gis-cover.webp",
-    year: "2026",
-    chips: ["Generative", "Visual System", "Experiment"],
-    section: "creative-coding",
-    pageType: "custom",
-  },
   {
     slug: "vibe-coding-portfolio",
     title: "Building This Portfolio: A Design-First Vibe Coding Workflow",

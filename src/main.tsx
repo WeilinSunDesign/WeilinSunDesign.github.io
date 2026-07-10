@@ -10,8 +10,8 @@ import VrVolunteerSystem from "./VrVolunteerSystem";
 import SwiftfoodPage from "./swiftfood";
 import HealthtechPage from "./healthtech";
 import SmarthomePage from "./Smarthome";
+import AffectiveComputingPage from "./affectivecomputing";
 import Other4Page from "./other-4";
-import GenerativeImagePage from "./generative-image";
 import VibeCodingPortfolio from "./vibe-coding-portfolio";
 import CardgamePage from "./cardgame";
 import CaseStudyPage from "./CaseStudyPage";
@@ -37,8 +37,8 @@ createRoot(document.getElementById("root")!).render(
         <Route path="/projects/swiftfood"             element={<SwiftfoodPage />} />
         <Route path="/projects/healthtech"            element={<HealthtechPage />} />
         <Route path="/projects/smarthome"             element={<SmarthomePage />} />
+        <Route path="/projects/affectivecomputing"    element={<AffectiveComputingPage />} />
         <Route path="/projects/other-4"               element={<Other4Page />} />
-        <Route path="/projects/creative-2"            element={<GenerativeImagePage />} />
         <Route path="/projects/vibe-coding-portfolio" element={<VibeCodingPortfolio />} />
         <Route path="/projects/cardgame"              element={<CardgamePage />} />
 

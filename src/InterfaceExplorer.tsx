@@ -1,89 +1,88 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // DATA — nested tree matching the information-architecture diagram.
-// `lowFi` / `hiFi` point at filenames in /public. Swap these and the `label`s
-// to match your own screens/labels whenever you like.
+// `hiFi` points at a filename in /public. Swap these and the `label`s to
+// match your own screens/labels whenever you like.
 //
 // Every node has its own dedicated hi-fi filename, following the pattern
-// `sl-hifi-<id>.png` — drop each exported frame into /public under that name.
+// `sl-hifi-<id>.webp` — drop each exported frame into /public under that name.
 // ─────────────────────────────────────────────────────────────────────────────
 type ArchNode = {
   id: string;
   label: string;
-  lowFi: string;
   hiFi: string;
   children?: ArchNode[];
 };
 
 const architecture: ArchNode = {
-  id: "home", label: "Home", lowFi: "低保真_01.png", hiFi: "sl-hifi-home.png",
+  id: "home", label: "Home", hiFi: "sl-hifi-home.webp",
   children: [
     {
-      id: "login", label: "Login", lowFi: "低保真_02.png", hiFi: "sl-hifi-login.png",
+      id: "login", label: "Login", hiFi: "sl-hifi-login.webp",
       children: [
-        { id: "register-account", label: "Register Account", lowFi: "低保真_02.png", hiFi: "sl-hifi-register-account.png" },
+        { id: "register-account", label: "Register Account", hiFi: "sl-hifi-register-account.webp" },
       ],
     },
     {
-      id: "control-center", label: "Control Center", lowFi: "低保真_03.png", hiFi: "sl-hifi-control-center.png",
+      id: "control-center", label: "Control Center", hiFi: "sl-hifi-control-center.webp",
       children: [
         {
-          id: "condition", label: "Condition", lowFi: "低保真_04.png", hiFi: "sl-hifi-condition.png",
+          id: "condition", label: "Condition", hiFi: "sl-hifi-control-center.webp",
           children: [
-            { id: "sensor",         label: "Sensor",         lowFi: "低保真_04.png", hiFi: "sl-hifi-sensor.png" },
-            { id: "device-linkage", label: "Device Linkage", lowFi: "低保真_04.png", hiFi: "sl-hifi-device-linkage.png" },
+            { id: "sensor",         label: "Sensor",         hiFi: "sl-hifi-control-center.webp" },
+            { id: "device-linkage", label: "Device Linkage", hiFi: "sl-hifi-control-center.webp" },
           ],
         },
       ],
     },
     {
-      id: "personal-page", label: "Personal Page", lowFi: "低保真_05.png", hiFi: "sl-hifi-personal-page.png",
+      id: "personal-page", label: "Personal Page", hiFi: "sl-hifi-health.webp",
       children: [
-        { id: "health", label: "Health", lowFi: "低保真_06.png", hiFi: "sl-hifi-health.png" },
+        { id: "health", label: "Health", hiFi: "sl-hifi-health.webp" },
         {
-          id: "scenarios", label: "Scenarios", lowFi: "低保真_07.png", hiFi: "sl-hifi-scenarios.png",
+          id: "scenarios", label: "Scenarios", hiFi: "sl-hifi-health.webp",
           children: [
-            { id: "related-device", label: "Related Device", lowFi: "低保真_07.png", hiFi: "sl-hifi-related-device.png" },
+            { id: "related-device", label: "Related Device", hiFi: "sl-hifi-health.webp" },
           ],
         },
       ],
     },
     {
-      id: "room", label: "Room", lowFi: "低保真_08.png", hiFi: "sl-hifi-room.png",
+      id: "room", label: "Room", hiFi: "sl-hifi-room.webp",
       children: [
-        { id: "video-monitors", label: "Video Monitors", lowFi: "低保真_09.png", hiFi: "sl-hifi-video-monitors.png" },
+        { id: "video-monitors", label: "Video Monitors", hiFi: "sl-hifi-video-monitors.webp" },
         {
-          id: "roommate", label: "Roommate", lowFi: "低保真_10.png", hiFi: "sl-hifi-roommate.png",
+          id: "roommate", label: "Roommate", hiFi: "sl-hifi-roommate.webp",
           children: [
-            { id: "situation", label: "Situation", lowFi: "低保真_10.png", hiFi: "sl-hifi-situation.png" },
+            { id: "situation", label: "Situation", hiFi: "sl-hifi-situation.webp" },
           ],
         },
         {
-          id: "environment", label: "Environment", lowFi: "低保真_11.png", hiFi: "sl-hifi-environment.png",
+          id: "environment", label: "Environment", hiFi: "sl-hifi-environment.webp",
           children: [
-            { id: "weather",  label: "Weather",  lowFi: "低保真_11.png", hiFi: "sl-hifi-weather.png" },
-            { id: "security", label: "Security", lowFi: "低保真_11.png", hiFi: "sl-hifi-security.png" },
+            { id: "weather",  label: "Weather",  hiFi: "sl-hifi-weather.webp" },
+            { id: "security", label: "Security", hiFi: "sl-hifi-security.webp" },
           ],
         },
       ],
     },
     {
-      id: "emotion", label: "Emotion", lowFi: "低保真_12.png", hiFi: "sl-hifi-emotion.png",
+      id: "emotion", label: "Emotion", hiFi: "sl-hifi-emotion.webp",
       children: [
         {
-          id: "signal-lamp", label: "Signal Lamp", lowFi: "低保真_13.png", hiFi: "sl-hifi-signal-lamp.png",
+          id: "signal-lamp", label: "Signal Lamp", hiFi: "sl-hifi-signal-lamp.webp",
           children: [
-            { id: "emotion-data", label: "Emotion Data", lowFi: "低保真_13.png", hiFi: "sl-hifi-emotion-data.png" },
+            { id: "emotion-data", label: "Emotion Data", hiFi: "sl-hifi-signal-lamp.webp" },
           ],
         },
       ],
     },
-    { id: "notification", label: "Notification", lowFi: "低保真_14.png", hiFi: "sl-hifi-notification.png" },
+    { id: "notification", label: "Notification", hiFi: "sl-hifi-notification.webp" },
     {
-      id: "setting", label: "Setting", lowFi: "低保真_15_11 副本.png", hiFi: "sl-hifi-setting.png",
+      id: "setting", label: "Setting", hiFi: "sl-hifi-setting.webp",
       children: [
-        { id: "user-info", label: "User Info", lowFi: "低保真_15_11 副本.png", hiFi: "sl-hifi-user-info.png" },
+        { id: "user-info", label: "User Info", hiFi: "sl-hifi-user-info.webp" },
       ],
     },
   ],
@@ -97,8 +96,6 @@ function findNode(node: ArchNode, id: string): ArchNode | null {
   }
   return null;
 }
-
-type Fidelity = "low" | "hi";
 
 // ── Information architecture sitemap ────────────────────────────────────────────
 
@@ -231,6 +228,10 @@ function IADiagram({
 function PhoneFrame({ src, alt }: { src: string; alt: string }) {
   const [error, setError] = useState(false);
 
+  useEffect(() => {
+    setError(false);
+  }, [src]);
+
   return (
     <div
       style={{
@@ -297,34 +298,12 @@ function PhoneFrame({ src, alt }: { src: string; alt: string }) {
 
 export default function InterfaceExplorer() {
   const [activeId, setActiveId] = useState(architecture.id);
-  const [fidelity, setFidelity] = useState<Fidelity>("hi");
 
   const active = findNode(architecture, activeId) ?? architecture;
-  const src = fidelity === "hi" ? active.hiFi : active.lowFi;
 
   return (
     <div>
-      {/* Fidelity toggle */}
-      <div className="flex items-center justify-between flex-wrap gap-[12px] mb-[24px]">
-        <p className="type-eyebrow">Select a node to preview its screen</p>
-        <div className="flex gap-[8px]">
-          {(["low", "hi"] as Fidelity[]).map((f) => (
-            <button
-              key={f}
-              onClick={() => setFidelity(f)}
-              className="inline-flex rounded-full border px-3 py-1 type-chip bg-my-bg"
-              style={{
-                cursor: "pointer",
-                borderColor: fidelity === f ? "#63C2BD" : "#0D0D0D",
-                color: fidelity === f ? "#63C2BD" : "#0D0D0D",
-                transition: "color 0.15s ease, border-color 0.15s ease",
-              }}
-            >
-              {f === "low" ? "Low-fi" : "Hi-fi"}
-            </button>
-          ))}
-        </div>
-      </div>
+      <p className="type-eyebrow mb-[24px]">Select a node to preview its screen</p>
 
       <div className="flex flex-col lg:flex-row gap-[32px] lg:gap-[40px]">
         {/* Left column — IA diagram (~65%) */}
@@ -334,7 +313,7 @@ export default function InterfaceExplorer() {
 
         {/* Right column — phone frame (~35%) */}
         <div className="w-full lg:w-[35%] flex items-start justify-center">
-          <PhoneFrame src={src} alt={`${active.label} — ${fidelity === "hi" ? "high" : "low"} fidelity`} />
+          <PhoneFrame src={active.hiFi} alt={active.label} />
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "./components/Header";
+import InterfaceExplorer from "./InterfaceExplorer";
 
 // ── Nav sections ──────────────────────────────────────────────────────────────
 
@@ -136,15 +137,15 @@ const emotionColors = [
 ];
 
 const relatedCases = [
-  { id: "sl-case-malmo.webp",   title: "Malmö University city lab",                 body: "A vibrant university city of 300,000 inhabitants using Bluetooth systems to monitor daily activity — the city itself treated as a living lab." },
-  { id: "sl-case-aarhus.webp",  title: "Dept. of Computer Science, Aarhus University", body: "159 apartments fitted with sensors across more than 200 students, linking real-world electricity and water use to a game." },
-  { id: "sl-case-mit.webp",     title: "MIT Place Lab",                              body: "A 1,000 sq ft apartment where individuals or couples live for days or weeks while multi-modal sensor data is collected for shared studies." },
+  { id: "sl-case-malmo.png",   title: "Malmö University city lab",                 body: "A vibrant university city of 300,000 inhabitants using Bluetooth systems to monitor daily activity — the city itself treated as a living lab." },
+  { id: "sl-case-aarhus.png",  title: "Dept. of Computer Science, Aarhus University", body: "159 apartments fitted with sensors across more than 200 students, linking real-world electricity and water use to a game." },
+  { id: "sl-case-mit.png",     title: "MIT Place Lab",                              body: "A 1,000 sq ft apartment where individuals or couples live for days or weeks while multi-modal sensor data is collected for shared studies." },
 ];
 
 const inspirationRefs = [
-  { id: "sl-inspiration-places.webp",    title: "Places | Mental-Soothing Device", body: "A series of lighting effects combining colours and motion. Place is a product that creates an immersive, calming experience." },
-  { id: "sl-inspiration-awareness.webp", title: "Sense of Awareness — Hyunwoo Lee (RCA)", body: "Provides a unique stimulus to people in low-alertness moments, attracting natural light to create a moment of consciousness." },
-  { id: "sl-inspiration-artreform.webp", title: "ArtReform — Sara Poggiaspalla",   body: "An art installation that increases the feeling of safety when people walk through low-activeness areas such as cold alleys and underpasses." },
+  { id: "sl-inspiration-places.png",    title: "Places | Mental-Soothing Device", body: "A series of lighting effects combining colours and motion. Place is a product that creates an immersive, calming experience." },
+  { id: "sl-inspiration-awareness.png", title: "Sense of Awareness — Hyunwoo Lee (RCA)", body: "Provides a unique stimulus to people in low-alertness moments, attracting natural light to create a moment of consciousness." },
+  { id: "sl-inspiration-artreform.png", title: "ArtReform — Sara Poggiaspalla",   body: "An art installation that increases the feeling of safety when people walk through low-activeness areas such as cold alleys and underpasses." },
 ];
 
 const designProgress = ["Research", "Site selection", "Interior construction", "System test", "System operation", "Data environment"];
@@ -152,25 +153,25 @@ const designProgress = ["Research", "Site selection", "Interior construction", "
 const environmentSensors = ["Temperature sensor", "Light sensors", "Pressure sensors", "Noise sensors", "Air quality monitor", "Electric sensor (support by Xiaomi)"];
 
 const productDimensions = [
-  { id: "sl-dimension-side.webp", caption: "Side profile — 32cm × 9cm" },
-  { id: "sl-dimension-track.webp", caption: "Track detail — 4cm" },
-  { id: "sl-dimension-top.webp",  caption: "Top view — 32cm × 27cm, base 9cm" },
+  { id: "sl-dimension-side.png", caption: "Side profile — 32cm × 9cm" },
+  { id: "sl-dimension-track.png", caption: "Track detail — 4cm" },
+  { id: "sl-dimension-top.png",  caption: "Top view — 32cm × 27cm, base 9cm" },
 ];
 
 const lifestyleRenders = [
-  { id: "sl-render-shelf.webp",   caption: "Yellow — happiness, on a wooden shelf" },
-  { id: "sl-render-table.webp",   caption: "Blue — surprise, bedside table" },
-  { id: "sl-render-red.webp",     caption: "Red — anger, side table" },
-  { id: "sl-render-plant.webp",   caption: "Green — fear, styled with foliage" },
+  { id: "sl-render-shelf.png",   caption: "Yellow — happiness, on a wooden shelf" },
+  { id: "sl-render-table.png",   caption: "Blue — surprise, bedside table" },
+  { id: "sl-render-red.png",     caption: "Red — anger, side table" },
+  { id: "sl-render-plant.png",   caption: "Green — fear, styled with foliage" },
 ];
 
 const storyboardPanels = [
-  { id: "sl-storyboard-1.webp", num: "01", text: "It showed the time to be about 9 o'clock — Kim arrives home." },
-  { id: "sl-storyboard-2.webp", num: "02", text: "Vicky noticed that Kim sat alone in his bedroom." },
-  { id: "sl-storyboard-3.webp", num: "03", text: "Vicky wanted to know the mood of Kim, and starts the signal light." },
-  { id: "sl-storyboard-4.webp", num: "04", text: "One turn took 24s. It showed the last 24h of Kim's emotional state." },
-  { id: "sl-storyboard-5.webp", num: "05", text: "It was known that Kim was upset." },
-  { id: "sl-storyboard-6.webp", num: "06", text: "Vicky could give him a hot drink to make him happy." },
+  { id: "sl-storyboard-1.png", num: "01", text: "It showed the time to be about 9 o'clock — Kim arrives home." },
+  { id: "sl-storyboard-2.png", num: "02", text: "Vicky noticed that Kim sat alone in his bedroom." },
+  { id: "sl-storyboard-3.png", num: "03", text: "Vicky wanted to know the mood of Kim, and starts the signal light." },
+  { id: "sl-storyboard-4.png", num: "04", text: "One turn took 24s. It showed the last 24h of Kim's emotional state." },
+  { id: "sl-storyboard-5.png", num: "05", text: "It was known that Kim was upset." },
+  { id: "sl-storyboard-6.png", num: "06", text: "Vicky could give him a hot drink to make him happy." },
 ];
 
 // ── Published research ──────────────────────────────────────────────────────────
@@ -421,7 +422,7 @@ export default function SmarthomePage() {
         style={{
           position:           "relative",
           height:             "100svh",
-          backgroundImage:    "url(/slbg.webp)",
+          backgroundImage:    "url(/slbg.png)",
           backgroundSize:     "cover",
           backgroundPosition: typeof window !== "undefined" && window.innerWidth < 768
             ? `center ${scrollY * 0.1}px`
@@ -441,7 +442,7 @@ export default function SmarthomePage() {
               marginBottom: "0",
             }}
           >
-            Affective Computing for Smart Home — Sensing and Representing Emotional Needs at Home
+            Affective computing in human habitats— Emotional Needs at shared House
           </h1>
 
           <div className="flex flex-wrap gap-2 mt-[20px] md:mt-[32px]">
@@ -499,7 +500,7 @@ export default function SmarthomePage() {
           {/* Left — image */}
           <div className="flex flex-col justify-center self-stretch">
             <img
-              src="/slintro.webp"
+              src="/slintro.png"
               alt="Affective computing research overview"
               className="w-full"
               style={{ display: "block" }}
@@ -594,7 +595,7 @@ export default function SmarthomePage() {
             </div>
 
             <div className="mt-[24px] flex flex-col gap-[8px]">
-              <ImagePlaceholder filename="sl-market-growth.webp" caption="Estimated households worldwide with smart devices, 2022 vs 2027" ratio="21/9" />
+              <ImagePlaceholder filename="sl-market-growth.png" caption="Estimated households worldwide with smart devices, 2022 vs 2027" ratio="21/9" />
             </div>
 
             <SubDivider />
@@ -652,8 +653,8 @@ export default function SmarthomePage() {
               </div>
             </div>
             <div className="mt-[16px] flex flex-col gap-[16px]">
-              <ImagePlaceholder filename="sl-survey-demographics.webp" caption="Questionnaire — gender, age, housing situation, home time, main concerns" ratio="21/9" />
-              <ImagePlaceholder filename="sl-survey-crossanalysis.webp" caption="Cross analysis — emotion needs vs. home time / housing situation" ratio="21/9" />
+              <ImagePlaceholder filename="sl-survey-demographics.png" caption="Questionnaire — gender, age, housing situation, home time, main concerns" ratio="21/9" />
+              <ImagePlaceholder filename="sl-survey-crossanalysis.png" caption="Cross analysis — emotion needs vs. home time / housing situation" ratio="21/9" />
             </div>
 
             <SubDivider />
@@ -695,7 +696,7 @@ export default function SmarthomePage() {
             </div>
 
             <div className="mt-[16px]">
-              <ImagePlaceholder filename="sl-interview-photos.webp" caption="Interview sessions" ratio="21/9" />
+              <ImagePlaceholder filename="sl-interview-photos.png" caption="Interview sessions" ratio="21/9" />
             </div>
 
             <SubDivider />
@@ -791,14 +792,14 @@ export default function SmarthomePage() {
               </div>
               <div className="hidden md:block" />
               <div className="md:col-span-2">
-                <ImagePlaceholder filename="sl-scenario-mindmap.webp" caption="Scenario mind map — space, device, activity" ratio="4/3" />
+                <ImagePlaceholder filename="sl-scenario-mindmap.png" caption="Scenario mind map — space, device, activity" ratio="4/3" />
               </div>
             </div>
 
             <div className="mt-[16px] grid grid-cols-1 sm:grid-cols-3 gap-[12px]">
-              <ImagePlaceholder filename="sl-scenario-photo-1.webp" caption="Research session" ratio="1/1" />
-              <ImagePlaceholder filename="sl-scenario-photo-2.webp" caption="Research session" ratio="1/1" />
-              <ImagePlaceholder filename="sl-scenario-photo-3.webp" caption="Research session" ratio="1/1" />
+              <ImagePlaceholder filename="sl-scenario-photo-1.png" caption="Research session" ratio="1/1" />
+              <ImagePlaceholder filename="sl-scenario-photo-2.png" caption="Research session" ratio="1/1" />
+              <ImagePlaceholder filename="sl-scenario-photo-3.png" caption="Research session" ratio="1/1" />
             </div>
 
             <SubDivider />
@@ -896,7 +897,7 @@ export default function SmarthomePage() {
               </div>
               <div className="hidden md:block" />
               <div className="md:col-span-2">
-                <ImagePlaceholder filename="sl-colorwheel.webp" caption="Colour-association wheel" ratio="4/3" />
+                <ImagePlaceholder filename="sl-colorwheel.png" caption="Colour-association wheel" ratio="4/3" />
               </div>
             </div>
 
@@ -1092,15 +1093,15 @@ export default function SmarthomePage() {
               </div>
               <div className="hidden md:block" />
               <div className="md:col-span-2">
-                <ImagePlaceholder filename="sl-livinglab-floorplan.webp" caption="Living lab floor plan — Beijing" ratio="4/3" />
+                <ImagePlaceholder filename="sl-livinglab-floorplan.png" caption="Living lab floor plan — Beijing" ratio="4/3" />
               </div>
             </div>
 
             <div className="mt-[16px] grid grid-cols-2 gap-[12px]">
-              <ImagePlaceholder filename="sl-livinglab-livingroom.webp" caption="Living room" ratio="4/3" />
-              <ImagePlaceholder filename="sl-livinglab-bedroom.webp" caption="Bedroom" ratio="4/3" />
-              <ImagePlaceholder filename="sl-livinglab-kitchen.webp" caption="Kitchen" ratio="4/3" />
-              <ImagePlaceholder filename="sl-livinglab-inprocess.webp" caption="Sensor wiring — room in process" ratio="4/3" />
+              <ImagePlaceholder filename="sl-livinglab-livingroom.png" caption="Living room" ratio="4/3" />
+              <ImagePlaceholder filename="sl-livinglab-bedroom.png" caption="Bedroom" ratio="4/3" />
+              <ImagePlaceholder filename="sl-livinglab-kitchen.png" caption="Kitchen" ratio="4/3" />
+              <ImagePlaceholder filename="sl-livinglab-inprocess.png" caption="Sensor wiring — room in process" ratio="4/3" />
             </div>
 
             <SubDivider />
@@ -1127,12 +1128,12 @@ export default function SmarthomePage() {
               <div>
                 <p className="type-eyebrow mb-[10px]">Gait recognition</p>
                 <p className="type-body-sm mb-[12px]">A sensing floor detects walking patterns.</p>
-                <ImagePlaceholder filename="sl-gait-recognition.webp" ratio="4/3" />
+                <ImagePlaceholder filename="sl-gait-recognition.png" ratio="4/3" />
               </div>
               <div>
                 <p className="type-eyebrow mb-[10px]">Gesture recognition</p>
                 <p className="type-body-sm mb-[12px]">A depth-sensing camera captures gesture data.</p>
-                <ImagePlaceholder filename="sl-gesture-recognition.webp" ratio="4/3" />
+                <ImagePlaceholder filename="sl-gesture-recognition.png" ratio="4/3" />
               </div>
             </div>
 
@@ -1151,7 +1152,7 @@ export default function SmarthomePage() {
             </div>
 
             <div className="mt-[16px]">
-              <ImagePlaceholder filename="sl-sketch.webp" caption="Concept sketches — colour, form, motion" ratio="21/9" />
+              <ImagePlaceholder filename="sl-sketch.png" caption="Concept sketches — colour, form, motion" ratio="21/9" />
             </div>
           </section>
 
@@ -1190,7 +1191,7 @@ export default function SmarthomePage() {
               </div>
               <div className="hidden md:block" />
               <div className="md:col-span-2">
-                <ImagePlaceholder filename="sl-exploded-view.webp" caption="Exploded view" ratio="4/3" />
+                <ImagePlaceholder filename="sl-exploded-view.png" caption="Exploded view" ratio="4/3" />
               </div>
             </div>
 
@@ -1225,7 +1226,7 @@ export default function SmarthomePage() {
             </div>
 
             <div className="mt-[16px]">
-              <ImagePlaceholder filename="sl-render-hero.webp" caption="Signal Light — full colour spectrum across the track" ratio="21/9" />
+              <ImagePlaceholder filename="sl-render-hero.png" caption="Signal Light — full colour spectrum across the track" ratio="21/9" />
             </div>
 
             <div className="mt-[16px] grid grid-cols-2 sm:grid-cols-4 gap-[12px]">
@@ -1237,47 +1238,6 @@ export default function SmarthomePage() {
             <SubDivider />
 
             <p className="font-inria-serif mt-[40px] mb-[32px] md:mb-[48px]" style={{ fontSize: "clamp(1.1rem, 2vw, 1.8rem)", lineHeight: 1 }}>08b — Interface &amp; Final Design</p>
-
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[24px]">
-              <div>
-                <p className="type-eyebrow mb-[16px]">Information architecture</p>
-                <p className="type-body">The app organises around five hubs off the home screen.</p>
-              </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-[8px]">
-                  {[
-                    { hub: "Control Center", items: "Condition · Sensor · Device linkage" },
-                    { hub: "Personal Page",  items: "Health · Scenarios · Related device" },
-                    { hub: "Room",           items: "Video monitors · Roommate situation · Environment (weather, security)" },
-                    { hub: "Emotion",        items: "Signal lamp · Emotion data" },
-                    { hub: "Notification",   items: "Alerts across all hubs" },
-                    { hub: "Setting",        items: "User info · Account" },
-                  ].map((h) => (
-                    <div key={h.hub} className="border border-black/20 p-[14px]">
-                      <p className="type-body-sm mb-[4px]">{h.hub}</p>
-                      <p className="font-futura-medium text-[11px] leading-relaxed text-black/50">{h.items}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <SubDivider />
-
-            {/* Low-fi */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[24px]">
-              <div>
-                <p className="type-eyebrow mb-[16px]">Low-fidelity wireframes</p>
-                <p className="type-body">Welcome → sign up/in → home → control center, room, emotion and settings tabs → personal and room schedule pages.</p>
-              </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2">
-                <ImagePlaceholder filename="sl-lofi-wireframes.webp" caption="Low-fidelity flow" ratio="4/3" />
-              </div>
-            </div>
-
-            <SubDivider />
 
             {/* Logo / colour / font */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[24px]">
@@ -1299,21 +1259,17 @@ export default function SmarthomePage() {
                     </div>
                   ))}
                 </div>
-                <ImagePlaceholder filename="sl-logo-exploration.webp" caption="Logo exploration" ratio="16/9" />
+                <ImagePlaceholder filename="sl-logo-exploration.png" caption="Logo exploration" ratio="16/9" />
               </div>
             </div>
 
             <SubDivider />
 
-            {/* Hi-fi screens */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[24px]">
-              <div>
-                <p className="type-eyebrow mb-[16px]">High-fidelity screens</p>
-              </div>
-              <div className="hidden md:block" />
-              <div className="md:col-span-2">
-                <ImagePlaceholder filename="sl-hifi-screens.webp" caption="Control center, room, emotion, notifications, settings and profile" ratio="4/3" />
-              </div>
+            {/* Interactive screen explorer — low-fi / hi-fi, by architecture node */}
+            <div className="mb-[24px]">
+              <p className="type-eyebrow mb-[16px]">Explore the screens</p>
+              <p className="type-body mb-[24px]">Welcome → sign up/in → home → control center, room, emotion and settings tabs → personal and room schedule pages. Pick a node to preview it, and flip between low- and high-fidelity.</p>
+              <InterfaceExplorer />
             </div>
 
             <SubDivider />
@@ -1338,7 +1294,7 @@ export default function SmarthomePage() {
               ))}
             </div>
 
-            <ImagePlaceholder filename="sl-final-scene.webp" caption="It was known that Kim was upset, so Vicky could give him a hot drink to make him happy." ratio="21/9" />
+            <ImagePlaceholder filename="sl-final-scene.png" caption="It was known that Kim was upset, so Vicky could give him a hot drink to make him happy." ratio="21/9" />
           </section>
 
           {/* Back link */}

@@ -91,7 +91,7 @@ export const projects: Project[] = [
   },
   {
     slug: "smarthome",
-    title: "Affective Computing for Smart Home — Sensing and Representing Emotional Needs at Home",
+    title: "Affective computing in human habitats— Emotional Needs at shared House",
     coverImage: "/sl-cover.webp",
     year: "2021",
     chips: ["Affective Computing", "Smart Home Research", "Published Research"],

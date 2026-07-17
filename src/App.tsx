@@ -345,11 +345,12 @@ export default function App() {
         <div className="w-1/2 max-md:z-[0] max-md:w-[68%] max-md:fixed max-md:top-[66%] max-md:left-[16%] max-md:-translate-y-1/2 max-md:left-0 max-md:right-0 flex flex-col">
           {/* 轮播主体 */}
           <div
-            className="relative flex-1 min-h-[calc(100vh-64px)] max-md:min-h-0 overflow-hidden group"
+            className="relative flex-1 min-h-[calc(100vh-64px)] max-md:min-h-0 overflow-hidden group cursor-pointer"
             onMouseEnter={() => { setShowArrows(true);  pauseAutoplay(); }}
             onMouseLeave={() => { setShowArrows(false); resumeAutoplayWithDelay(); }}
             onTouchStart={() => pauseAutoplay()}
             onTouchEnd={()   => resumeAutoplayWithDelay()}
+            onClick={() => { if (!isAnimating) navigate(`/projects/${images[currentIndex].slug}`); }}
           >
             <SlidingImage
               currentImg={images[currentIndex].img}
@@ -363,7 +364,7 @@ export default function App() {
             <div className="absolute inset-0 bg-black/5 pointer-events-none" />
 
             <button
-              onClick={goToPrev}
+              onClick={(e) => { e.stopPropagation(); goToPrev(); }}
               className={`absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/20 text-white flex items-center justify-center transition-opacity duration-300 ${showArrows ? "opacity-100" : "opacity-0 pointer-events-none"}`}
               aria-label="Previous image"
             >
@@ -373,7 +374,7 @@ export default function App() {
             </button>
 
             <button
-              onClick={goToNext}
+              onClick={(e) => { e.stopPropagation(); goToNext(); }}
               className={`absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/20 text-white flex items-center justify-center transition-opacity duration-300 ${showArrows ? "opacity-100" : "opacity-0 pointer-events-none"}`}
               aria-label="Next image"
             >

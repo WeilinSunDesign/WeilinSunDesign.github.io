@@ -459,6 +459,66 @@ export default function VibeCodingPortfolio() {
         </div>
       </section>
 
+      {/* ── SECTION: TUTORIAL VIDEO ──────────────────────────────────────────── */}
+      <section className="px-[24px] md:px-[96px] pb-[120px] md:pb-[160px]">
+        <div className="border-t border-black/15 mb-[48px] md:mb-[72px]" />
+        <p className="type-eyebrow mb-[24px] md:mb-[40px]" style={{ letterSpacing: "0.1em" }}>
+          Watch the Tutorial
+        </p>
+
+        <p className="font-futura-medium text-[13px] md:text-[14px] leading-relaxed text-black/55 mb-[24px] max-w-[560px]">
+          A full walkthrough of this exact workflow, filmed from a zero-coding-background art student's perspective.
+        </p>
+
+        <div className="border border-black/15 bg-black/[0.02] max-w-[560px]" style={{ aspectRatio: "16 / 9" }}>
+          <iframe
+            src="https://www.youtube.com/embed/cjuj7HNo8X4"
+            title="Portfolio build tutorial"
+            className="w-full h-full"
+            style={{ display: "block", border: "none" }}
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+
+        <p className="font-futura-medium text-[13px] md:text-[14px] leading-relaxed text-black/55 mt-[32px] mb-[16px] max-w-[560px]">
+          Since sharing this tutorial on Xiaohongshu (Red Note), it's reached{" "}
+          <span className="text-black">20,000+ views</span>, with{" "}
+          <span className="text-black">1,000+ saves</span> and{" "}
+          <span className="text-black">1,500+ likes</span> combined across both posts.
+        </p>
+
+        <div className="flex flex-col gap-[10px] max-w-[560px]">
+          <a
+            href="https://www.xiaohongshu.com/discovery/item/6a015a41000000003601e7a6?source=webshare&xhsshare=pc_web&xsec_token=ABYGTbr-JuG2am5ujfinwN20-nPTtAPIy5ouqadmz3v_Y=&xsec_source=pc_share"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-[12px] border border-black/15 bg-black/[0.02] hover:border-brand transition-colors duration-200 px-[20px] py-[16px]"
+          >
+            <span className="font-futura-medium text-[13px] md:text-[14px] text-black leading-snug">
+              零基础艺术生30mins无痛建站保姆教程 — 且徐行
+            </span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-brand flex-shrink-0">
+              <path d="M7 17L17 7M17 7H8M17 7V16" />
+            </svg>
+          </a>
+          <a
+            href="https://www.xiaohongshu.com/discovery/item/69e56a99000000001d01b719?source=webshare&xhsshare=pc_web&xsec_token=ABZ0-OIh2afFRfkQ8gjIpxs0uFIlevfuPtizX0cJUfwHU=&xsec_source=pc_share"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-[12px] border border-black/15 bg-black/[0.02] hover:border-brand transition-colors duration-200 px-[20px] py-[16px]"
+          >
+            <span className="font-futura-medium text-[13px] md:text-[14px] text-black leading-snug">
+              零基础艺术生claudecode两周搭建作品集网站 — 且徐行
+            </span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-brand flex-shrink-0">
+              <path d="M7 17L17 7M17 7H8M17 7V16" />
+            </svg>
+          </a>
+        </div>
+      </section>
+
     </div>
   );
 }

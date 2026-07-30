@@ -114,7 +114,7 @@ export const projects: Project[] = [
     year: "2023",
     chips: ["Game Design", "Service Design", "Cross-cultural"],
     section: "ux-ui-projects",
-    pageType: "custom",
+    pageType: null,
   },
   {
     slug: "volunteer",

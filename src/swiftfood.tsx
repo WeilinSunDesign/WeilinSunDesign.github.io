@@ -8,11 +8,12 @@ const navSections = [
   { id: "s-context",       label: "01 — Overview" },
   { id: "s-evolution",     label: "02 — Evolution" },
   { id: "s-roles",         label: "03 — Four Roles" },
-  { id: "s-challenge",     label: "04 — Individual Ordering" },
-  { id: "s-design-system", label: "05 — Merchants" },
-  { id: "s-operations",    label: "06 — Catering & Corporate" },
-  { id: "s-riders",        label: "07 — Rider's App" },
-  { id: "s-outcomes",      label: "08 — Outcomes" },
+  { id: "s-brand-system",  label: "04 — Design System" },
+  { id: "s-challenge",     label: "05 — Individual Ordering" },
+  { id: "s-design-system", label: "06 — Merchants" },
+  { id: "s-operations",    label: "07 — Catering & Corporate" },
+  { id: "s-riders",        label: "08 — Rider's App" },
+  { id: "s-outcomes",      label: "09 — Outcomes" },
 ];
 
 // ── Data ──────────────────────────────────────────────────────────────────────
@@ -734,13 +735,148 @@ export default function SwiftFood() {
 
           </section>
 
-          {/* 04 — Individual Ordering */}
-          <section id="s-challenge" className="pt-[56px] pb-[80px] md:pb-[120px] border-b border-black/15">
-            <SectionLabel>04 — Individual Ordering</SectionLabel>
+          {/* 04 — Design System */}
+          <section id="s-brand-system" className="pt-[56px] pb-[80px] md:pb-[120px] border-b border-black/15">
+            <SectionLabel>04 — Design System</SectionLabel>
 
-            {/* 04a — Path Not Taken */}
+            {/* Thesis */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[56px] md:mb-[72px]">
+              <div>
+                <p className="type-eyebrow mb-[16px]">Beyond individual screens</p>
+              </div>
+              <div className="md:col-span-3">
+                <p
+                  className="font-inria-serif leading-[1.2] tracking-tight text-black mb-[20px]"
+                  style={{ fontSize: "clamp(1.4rem, 2.4vw, 2.2rem)" }}
+                >
+                  I wasn't just designing screens — I was designing what would outlast me.
+                </p>
+                <p className="font-futura-medium text-[14px] md:text-[15px] leading-relaxed text-black/70 max-w-[600px]">
+                  As the founding product designer, I owned the brand and the design system from the first pixel — before there was a design team to inherit either. Both had to hold up across three product lines and four user roles, and, eventually, across a team that would carry the product forward without me.
+                </p>
+              </div>
+            </div>
+
+            <SubDivider />
+
+            {/* 04a — Branding */}
+            <div className="mt-[32px]">
+              <p className="font-inria-serif mb-[32px] md:mb-[48px]" style={{ fontSize: "clamp(1.1rem, 2vw, 1.8rem)", lineHeight: 1 }}>04a — Branding</p>
+
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
+                <div>
+                  <p className="type-eyebrow mb-[16px]">Visual identity</p>
+                  <p className="type-body">I established the brand's visual language — colour, typography, iconography, and tone — as the product's first designer.</p>
+                </div>
+                <div className="hidden md:block" />
+                <div className="md:col-span-2">
+                  <p className="type-body-key mb-[16px]">
+                    The identity had to work as a street-food consumer brand and, later, as a corporate B2B2C platform — without splitting into two brands.
+                  </p>
+                  <p className="type-body">Rather than a full rebrand at each phase, I kept a stable identity core and adjusted its expression — tone, density, colour intensity — to fit each context.</p>
+                </div>
+              </div>
+
+              <SubDivider />
+
+              <div className="flex gap-[12px] mt-[32px]">
+                <div className="flex-1"><ImagePlaceholder filename="brand-palette.webp" caption="Colour & typography system" ratio="auto" /></div>
+                <div className="flex-1"><ImagePlaceholder filename="brand-logo.webp" caption="Logo & iconography" ratio="auto" /></div>
+                <div className="flex-1"><ImagePlaceholder filename="brand-voice.webp" caption="Tone across touchpoints" ratio="auto" /></div>
+              </div>
+            </div>
+
+            <SubDivider />
+
+            {/* 04b — Design System */}
+            <div className="pt-[8px]">
+              <p className="font-inria-serif mb-[32px] md:mb-[48px]" style={{ fontSize: "clamp(1.1rem, 2vw, 1.8rem)", lineHeight: 1 }}>04b — Design System</p>
+
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
+                <div>
+                  <p className="type-eyebrow mb-[16px]">Built to be inherited</p>
+                  <p className="type-body">A brand alone doesn't keep a growing product consistent. Underneath it, I built a reusable component library and token system.</p>
+                </div>
+                <div className="hidden md:block" />
+                <div className="md:col-span-2">
+                  <p className="type-body-key mb-[16px]">
+                    Tokens, components, and interaction patterns were documented once and reused across the consumer app, catering web, and corporate platform.
+                  </p>
+                  <ul className="space-y-[8px] mb-[16px]">
+                    {[
+                      "Shared design tokens for colour, type, and spacing",
+                      "Documented components for handoff to engineering",
+                      "Patterns new features could adopt without new design decisions",
+                    ].map((item) => (
+                      <li key={item} className="flex items-start gap-[10px]">
+                        <span className="w-[4px] h-[4px] rounded-full bg-black/25 mt-[7px] flex-shrink-0" />
+                        <p className="type-body-sm">{item}</p>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="border-l-2 border-brand pl-[12px] py-[2px]">
+                    <p className="type-body-sm text-brand">The system, not any single screen, was the deliverable.</p>
+                  </div>
+                </div>
+              </div>
+
+              <SubDivider />
+
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px]">
+                <div className="hidden md:block" />
+                <div className="hidden md:block" />
+                <div className="md:col-span-2">
+                  <p className="type-body-sm text-black/40 italic">
+                    After I left the company, new features kept shipping on top of it — and the visual language stayed unified. Not because anyone was policing it, but because the system made consistency the default rather than an ongoing effort.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <SubDivider />
+
+            {/* Live today — embedded product */}
+            <div className="pt-[8px]">
+              <p className="type-eyebrow mb-[16px]">Still live</p>
+              <p className="type-body mb-[20px] max-w-[600px]">
+                Below is{" "}
+                <a href="https://swiftfood.uk/" target="_blank" rel="noopener noreferrer" className="text-brand underline">
+                  swiftfood.uk
+                </a>{" "}
+                as it runs today — new features have shipped since I left as founding designer, but the brand and component system I built underneath still hold the interface together.
+              </p>
+              <div className="border border-black/15 bg-black/[0.02]" style={{ width: "50%", minWidth: "280px" }}>
+                <iframe
+                  src="https://swiftfood.uk/"
+                  title="SwiftFood — live site"
+                  className="w-full"
+                  style={{ height: "320px", display: "block", border: "none" }}
+                  loading="lazy"
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                />
+              </div>
+              <a
+                href="https://swiftfood.uk/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-futura-medium text-[12px] text-brand underline mt-[12px] inline-flex items-center gap-1"
+              >
+                Open swiftfood.uk in a new tab
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M7 17L17 7M17 7H8M17 7V16" />
+                </svg>
+              </a>
+            </div>
+
+          </section>
+
+          {/* 05 — Individual Ordering */}
+          <section id="s-challenge" className="pt-[56px] pb-[80px] md:pb-[120px] border-b border-black/15">
+            <SectionLabel>05 — Individual Ordering</SectionLabel>
+
+            {/* 05a — Path Not Taken */}
             <div id="s-exploration">
-              <p className="font-inria-serif mb-[32px] md:mb-[48px]" style={{ fontSize: "clamp(1.1rem, 2vw, 1.8rem)", lineHeight: 1 }}>04a — Path Not Taken</p>
+              <p className="font-inria-serif mb-[32px] md:mb-[48px]" style={{ fontSize: "clamp(1.1rem, 2vw, 1.8rem)", lineHeight: 1 }}>05a — Path Not Taken</p>
 
               {/* Why I abandoned the map-based interface */}
               <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
@@ -821,9 +957,9 @@ export default function SwiftFood() {
 
             <SubDivider />
 
-            {/* 04b — Individual Ordering */}
+            {/* 05b — Individual Ordering */}
             <div>
-              <p className="font-inria-serif mb-[32px] md:mb-[48px]" style={{ fontSize: "clamp(1.1rem, 2vw, 1.8rem)", lineHeight: 1 }}>04b — Individual Ordering</p>
+              <p className="font-inria-serif mb-[32px] md:mb-[48px]" style={{ fontSize: "clamp(1.1rem, 2vw, 1.8rem)", lineHeight: 1 }}>05b — Individual Ordering</p>
 
               {/* Intro — text col 1 | blank col 2 | body cols 3-4 */}
               <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
@@ -880,9 +1016,9 @@ export default function SwiftFood() {
 
           </section>
 
-          {/* 05 — Designing for Merchants */}
+          {/* 06 — Designing for Merchants */}
           <section id="s-design-system" className="pt-[56px] pb-[256px] border-b border-black/15">
-            <SectionLabel>05 — Designing for merchants</SectionLabel>
+            <SectionLabel>06 — Designing for merchants</SectionLabel>
 
             {/* Intro — text col 1 | blank col 2 | body cols 3-4 */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
@@ -973,13 +1109,13 @@ export default function SwiftFood() {
 
           </section>
 
-          {/* 06 — Catering & Corporate */}
+          {/* 07 — Catering & Corporate */}
           <section id="s-operations" className="pt-[56px] pb-[80px] md:pb-[120px] border-b border-black/15">
-            <SectionLabel>06 — Catering & Corporate</SectionLabel>
+            <SectionLabel>07 — Catering & Corporate</SectionLabel>
 
-            {/* 06a — Catering */}
+            {/* 07a — Catering */}
             <div className="mb-[56px]">
-              <p className="font-inria-serif mb-[32px] md:mb-[48px]" style={{ fontSize: "clamp(1.1rem, 2vw, 1.8rem)", lineHeight: 1 }}>06a — Catering</p>
+              <p className="font-inria-serif mb-[32px] md:mb-[48px]" style={{ fontSize: "clamp(1.1rem, 2vw, 1.8rem)", lineHeight: 1 }}>07a — Catering</p>
 
               <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
                 <div>
@@ -1009,9 +1145,9 @@ export default function SwiftFood() {
 
             <SubDivider />
 
-            {/* 06b — Corporate */}
+            {/* 07b — Corporate */}
             <div className="pt-[40px]">
-              <p className="font-inria-serif mb-[32px] md:mb-[48px]" style={{ fontSize: "clamp(1.1rem, 2vw, 1.8rem)", lineHeight: 1 }}>06b — Corporate</p>
+              <p className="font-inria-serif mb-[32px] md:mb-[48px]" style={{ fontSize: "clamp(1.1rem, 2vw, 1.8rem)", lineHeight: 1 }}>07b — Corporate</p>
 
               <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
                 <div>
@@ -1044,9 +1180,9 @@ export default function SwiftFood() {
 
           </section>
 
-          {/* 07 — Rider's App */}
+          {/* 08 — Rider's App */}
           <section id="s-riders" className="pt-[56px] pb-[80px] md:pb-[120px] border-b border-black/15">
-            <SectionLabel>07 — Rider's App</SectionLabel>
+            <SectionLabel>08 — Rider's App</SectionLabel>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-x-[32px] gap-y-[24px] mb-[48px]">
               <div>
@@ -1074,9 +1210,9 @@ export default function SwiftFood() {
 
           </section>
 
-          {/* 08 — Outcomes */}
+          {/* 09 — Outcomes */}
           <section id="s-outcomes" className="pt-[56px] pb-[80px] md:pb-[120px] border-b border-black/15">
-            <SectionLabel>08 — Outcomes</SectionLabel>
+            <SectionLabel>09 — Outcomes</SectionLabel>
 
             {/* Business metrics */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-[16px] mb-[48px] md:mb-[64px]">
